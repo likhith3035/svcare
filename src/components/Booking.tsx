@@ -14,6 +14,8 @@ import {
   SITE,
   CONTACT,
 } from "@/data/site";
+import { useLanguage, SectionLangToggle } from "@/context/LanguageContext";
+import { TELUGU_CONTENT } from "@/data/telugu";
 
 type FormData = {
   name: string;
@@ -67,6 +69,10 @@ function getAvailableSlots(dateStr: string): string[] {
 }
 
 export default function Booking() {
+  const { isTelugu } = useLanguage();
+  const isBookingTelugu = isTelugu("booking");
+  const isPrescriptionTelugu = isTelugu("prescription");
+
   const [form, setForm] = useState<FormData>({
     name: "",
     phone: "",
@@ -220,25 +226,37 @@ export default function Booking() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* ─── Form Column ─── */}
           <div className="lg:col-span-7 bg-white p-6 sm:p-9 rounded-3xl shadow-clinical border border-slate-200/90">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal/10 text-teal-dark mb-2">
-              <span>Direct Scheduling • 6:00 AM to 8:00 PM</span>
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal/10 text-teal-dark">
+                <span>{isBookingTelugu ? TELUGU_CONTENT.booking.badge : "Direct Scheduling • 6:00 AM to 8:00 PM"}</span>
+              </div>
+              <SectionLangToggle section="booking" size="xs" />
             </div>
             <h2 className="font-heading text-2xl sm:text-3xl font-bold text-navy">
-              Book a test or health package
+              {isBookingTelugu ? TELUGU_CONTENT.booking.title : "Book a test or health package"}
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm mt-1 mb-6">
-              Instant appointment confirmation on WhatsApp. No advance payment required — pay after sample collection.
+              {isBookingTelugu
+                ? TELUGU_CONTENT.booking.subtitle
+                : "Instant appointment confirmation on WhatsApp. No advance payment required — pay after sample collection."}
             </p>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-5">
               {/* Who is this booking for? (1-tap chip selector) */}
               <div>
                 <label className="block text-xs font-bold text-navy uppercase tracking-wider mb-2">
-                  Who is this booking for?
+                  {isBookingTelugu ? TELUGU_CONTENT.booking.whoFor : "Who is this booking for?"}
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full min-w-0">
                   {BOOKING_FOR_OPTIONS.map((opt) => {
                     const isSelected = form.bookingFor === opt.id;
+                    let label: string = opt.label;
+                    if (isBookingTelugu) {
+                      if (opt.id === "Self") label = TELUGU_CONTENT.booking.self;
+                      else if (opt.id === "Parents / Elders") label = "తల్లిదండ్రుల కోసం";
+                      else if (opt.id === "Child") label = TELUGU_CONTENT.booking.child;
+                      else if (opt.id === "Family Member") label = TELUGU_CONTENT.booking.family;
+                    }
                     return (
                       <button
                         key={opt.id}
@@ -250,7 +268,7 @@ export default function Booking() {
                             : "bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200"
                         }`}
                       >
-                        <span className="leading-tight truncate w-full">{opt.label}</span>
+                        <span className="leading-tight truncate w-full">{label}</span>
                         <span className={`text-[10px] font-normal leading-tight truncate w-full ${isSelected ? "text-white/85" : "text-slate-400"}`}>
                           {opt.description}
                         </span>
@@ -516,10 +534,12 @@ export default function Booking() {
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                     <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.69 0-3.259-.52-4.555-1.408l-.327-.194-2.871.852.852-2.871-.194-.327A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
                   </svg>
-                  Confirm Appointment on WhatsApp
+                  <span>{isBookingTelugu ? TELUGU_CONTENT.booking.submitBtn : "Confirm Appointment on WhatsApp"}</span>
                 </button>
                 <p className="text-[11px] text-center text-slate-400 mt-2">
-                  No payment required now. Our laboratory phlebotomy team confirms within 15 minutes.
+                  {isBookingTelugu
+                    ? TELUGU_CONTENT.booking.noAdvanceNote
+                    : "No payment required now. Our laboratory phlebotomy team confirms within 15 minutes."}
                 </p>
               </div>
             </form>
@@ -536,17 +556,22 @@ export default function Booking() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <div className="min-w-0">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-teal text-white uppercase tracking-wider mb-1">
-                    📸 1-Tap Prescription Order
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-teal text-white uppercase tracking-wider">
+                      {isPrescriptionTelugu ? "📸 తక్షణ ఆర్డర్" : "📸 1-Tap Prescription Order"}
+                    </div>
+                    <SectionLangToggle section="prescription" size="xs" />
                   </div>
                   <h3 className="font-heading text-base sm:text-lg font-bold text-navy leading-snug break-words">
-                    Have a Doctor&apos;s Prescription Slip?
+                    {isPrescriptionTelugu ? TELUGU_CONTENT.prescriptionBanner.title : "Have a Doctor's Prescription Slip?"}
                   </h3>
                 </div>
               </div>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mb-4 break-words">
-                Don&apos;t worry about searching specific test names. Just snap a photo of your doctor&apos;s prescription slip and send it on WhatsApp. We will verify every test, give you an instant discounted quote, and schedule doorstep collection.
+                {isPrescriptionTelugu
+                  ? TELUGU_CONTENT.prescriptionBanner.description
+                  : "Don't worry about searching specific test names. Just snap a photo of your doctor's prescription slip and send it on WhatsApp. We will verify every test, give you an instant discounted quote, and schedule doorstep collection."}
               </p>
               <a
                 href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
@@ -560,7 +585,7 @@ export default function Booking() {
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                   <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.69 0-3.259-.52-4.555-1.408l-.327-.194-2.871.852.852-2.871-.194-.327A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
                 </svg>
-                <span>Send Prescription on WhatsApp</span>
+                <span>{isPrescriptionTelugu ? TELUGU_CONTENT.prescriptionBanner.cta : "Send Prescription on WhatsApp"}</span>
               </a>
             </div>
 

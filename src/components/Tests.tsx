@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { LAB_TESTS, LabTest, LabTestCategory, SITE, CONTACT, FLYER_DATA, FASTING_GUIDELINES } from "@/data/site";
+import { useLanguage, SectionLangToggle } from "@/context/LanguageContext";
+import { TELUGU_CONTENT } from "@/data/telugu";
 
 const CATEGORIES: { label: string; value: string }[] = [
   { label: "All Tests", value: "All" },
@@ -21,6 +23,10 @@ const CATEGORIES: { label: string; value: string }[] = [
 ];
 
 export default function Tests() {
+  const { isTelugu } = useLanguage();
+  const isPrescriptionTelugu = isTelugu("prescription");
+  const isFastingTelugu = isTelugu("fasting");
+
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [popularOnly, setPopularOnly] = useState(false);
@@ -142,14 +148,19 @@ export default function Tests() {
                 </svg>
               </div>
               <div className="min-w-0">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold bg-teal text-white uppercase tracking-wider mb-1.5 shadow-2xs">
-                  <span>📸 Instant Prescription Quote</span>
+                <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold bg-teal text-white uppercase tracking-wider shadow-2xs">
+                    <span>{isPrescriptionTelugu ? TELUGU_CONTENT.prescriptionBanner.badge : "📸 Instant Prescription Quote"}</span>
+                  </div>
+                  <SectionLangToggle section="prescription" size="xs" />
                 </div>
                 <h3 className="font-heading text-base sm:text-2xl font-bold text-white leading-tight break-words">
-                  Have a Doctor&apos;s Prescription Slip?
+                  {isPrescriptionTelugu ? TELUGU_CONTENT.prescriptionBanner.title : "Have a Doctor's Prescription Slip?"}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-200 mt-1.5 leading-relaxed font-normal break-words">
-                  Don&apos;t know the exact test names to search? Just snap a photo of your doctor&apos;s prescription slip and send it on WhatsApp. We&apos;ll verify the tests, give you an instant discounted quote, and schedule doorstep pickup in Srikalahasti.
+                  {isPrescriptionTelugu
+                    ? TELUGU_CONTENT.prescriptionBanner.description
+                    : "Don't know the exact test names to search? Just snap a photo of your doctor's prescription slip and send it on WhatsApp. We'll verify the tests, give you an instant discounted quote, and schedule doorstep pickup in Srikalahasti."}
                 </p>
               </div>
             </div>
@@ -167,7 +178,7 @@ export default function Tests() {
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                   <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.69 0-3.259-.52-4.555-1.408l-.327-.194-2.871.852.852-2.871-.194-.327A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
                 </svg>
-                <span>Send Prescription on WhatsApp</span>
+                <span>{isPrescriptionTelugu ? TELUGU_CONTENT.prescriptionBanner.cta : "Send Prescription on WhatsApp"}</span>
               </a>
             </div>
           </div>
@@ -188,16 +199,19 @@ export default function Tests() {
                 </svg>
               </div>
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                   <h3 className="font-heading text-xs sm:text-base font-bold text-navy truncate">
-                    Pre-Test Fasting &amp; Preparation Guide
+                    {isFastingTelugu ? TELUGU_CONTENT.fastingGuide.title : "Pre-Test Fasting & Preparation Guide"}
                   </h3>
                   <span className="text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full bg-teal/10 text-teal-dark shrink-0 hidden xs:inline-block">
-                    Clinical Advice
+                    {isFastingTelugu ? TELUGU_CONTENT.fastingGuide.badge : "Clinical Advice"}
                   </span>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <SectionLangToggle section="fasting" size="xs" />
+                  </div>
                 </div>
                 <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">
-                  Do you need to skip breakfast, drink water, or pause morning medication?
+                  {isFastingTelugu ? TELUGU_CONTENT.fastingGuide.subtitle : "Do you need to skip breakfast, drink water, or pause morning medication?"}
                 </p>
               </div>
             </div>
@@ -217,46 +231,57 @@ export default function Tests() {
           {isFastingGuideOpen && (
             <div className="px-3.5 pb-4 sm:px-6 sm:pb-6 pt-2 border-t border-slate-100 bg-slate-50/40 animate-fade-in w-full min-w-0">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2 w-full min-w-0">
-                {FASTING_GUIDELINES.map((item) => (
-                  <div
-                    key={item.id}
-                    className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/90 shadow-2xs flex flex-col justify-between min-w-0"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="text-xs font-bold text-navy leading-tight truncate">
-                          {item.category}
-                        </span>
-                        <span
-                          className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md shrink-0 ${
-                            item.badge === "Strict Fasting"
-                              ? "bg-amber-100 text-amber-800"
-                              : item.badge === "No Fasting"
-                              ? "bg-emerald-100 text-emerald-800"
-                              : item.badge === "Pre-Medication"
-                              ? "bg-indigo-100 text-indigo-800"
-                              : "bg-slate-100 text-slate-700"
-                          }`}
-                        >
-                          {item.badge}
-                        </span>
+                {FASTING_GUIDELINES.map((item) => {
+                  const teluguItem = isFastingTelugu
+                    ? (TELUGU_CONTENT.fastingGuide.items as Record<string, { category: string; rule: string; details: string }>)[item.id]
+                    : null;
+                  return (
+                    <div
+                      key={item.id}
+                      className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/90 shadow-2xs flex flex-col justify-between min-w-0"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="text-xs font-bold text-navy leading-tight truncate">
+                            {teluguItem ? teluguItem.category : item.category}
+                          </span>
+                          <span
+                            className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md shrink-0 ${
+                              item.badge === "Strict Fasting"
+                                ? "bg-amber-100 text-amber-800"
+                                : item.badge === "No Fasting"
+                                ? "bg-emerald-100 text-emerald-800"
+                                : item.badge === "Pre-Medication"
+                                ? "bg-indigo-100 text-indigo-800"
+                                : "bg-slate-100 text-slate-700"
+                            }`}
+                          >
+                            {item.badge}
+                          </span>
+                        </div>
+                        <p className="text-xs font-bold text-teal-dark mb-1">
+                          {teluguItem ? teluguItem.rule : item.rule}
+                        </p>
+                        <p className="text-[11px] text-slate-600 leading-relaxed font-normal">
+                          {teluguItem ? teluguItem.details : item.details}
+                        </p>
                       </div>
-                      <p className="text-xs font-bold text-teal-dark mb-1">
-                        {item.rule}
-                      </p>
-                      <p className="text-[11px] text-slate-600 leading-relaxed font-normal">
-                        {item.details}
-                      </p>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Water & Hydration Note */}
               <div className="mt-3.5 p-3 rounded-xl bg-teal/10 border border-teal/20 flex items-start gap-2.5 text-xs text-navy w-full min-w-0">
                 <span className="text-base shrink-0 mt-0.5">💧</span>
                 <p className="leading-relaxed">
-                  <strong>Water is always permitted:</strong> Drinking 1–2 glasses of normal plain water before blood collection is encouraged. It keeps veins well-hydrated for easy, painless single-prick sampling.
+                  {isFastingTelugu ? (
+                    <span>{TELUGU_CONTENT.fastingGuide.waterNote}</span>
+                  ) : (
+                    <>
+                      <strong>Water is always permitted:</strong> Drinking 1–2 glasses of normal plain water before blood collection is encouraged. It keeps veins well-hydrated for easy, painless single-prick sampling.
+                    </>
+                  )}
                 </p>
               </div>
             </div>

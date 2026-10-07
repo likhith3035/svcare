@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { SAMPLE_REPORT, SITE } from "@/data/site";
 import SampleReportModal from "@/components/SampleReportModal";
+import { useLanguage, SectionLangToggle } from "@/context/LanguageContext";
+import { TELUGU_CONTENT } from "@/data/telugu";
 
 const STEPS = [
   {
@@ -75,6 +77,9 @@ const REPORT_GUARANTEES = [
 ];
 
 export default function HomeCollection() {
+  const { isTelugu } = useLanguage();
+  const isHomeCollectionTelugu = isTelugu("homeCollection");
+
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   // Listen for global open-sample-report-modal events
@@ -95,63 +100,77 @@ export default function HomeCollection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal/10 text-teal-dark mb-3">
-            <span>Free Doorstep Diagnostics</span>
+          <div className="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal/10 text-teal-dark">
+              <span>{isHomeCollectionTelugu ? TELUGU_CONTENT.homeCollection.badge : "Free Doorstep Diagnostics"}</span>
+            </div>
+            <SectionLangToggle section="homeCollection" size="xs" />
           </div>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-navy tracking-tight">
-            The lab comes to you. <span className="text-teal font-normal italic">Free.</span>
+            {isHomeCollectionTelugu ? (
+              TELUGU_CONTENT.homeCollection.title
+            ) : (
+              <>
+                The lab comes to you. <span className="text-teal font-normal italic">Free.</span>
+              </>
+            )}
           </h2>
           <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-            Zero travel hassle, zero waiting rooms. Safe, hygienic sample collection in the comfort of your home or office.
+            {isHomeCollectionTelugu
+              ? TELUGU_CONTENT.homeCollection.subtitle
+              : "Zero travel hassle, zero waiting rooms. Safe, hygienic sample collection in the comfort of your home or office."}
           </p>
         </div>
 
         {/* 3 Step Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {STEPS.map((step) => (
-            <div
-              key={step.number}
-              className="p-6 sm:p-7 rounded-3xl bg-[#F6F9FA] border border-slate-200/80 hover:border-teal hover:bg-white hover:shadow-clinical transition-all duration-200 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="w-12 h-12 rounded-2xl bg-teal/15 text-teal font-mono font-black text-lg flex items-center justify-center">
-                    {step.number}
-                  </span>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-teal-dark bg-teal-light/50 px-2.5 py-1 rounded-full">
-                    {step.subtitle}
-                  </span>
+          {STEPS.map((step, idx) => {
+            const teluguStep = isHomeCollectionTelugu ? TELUGU_CONTENT.homeCollection.steps[idx] : null;
+            return (
+              <div
+                key={step.number}
+                className="p-6 sm:p-7 rounded-3xl bg-[#F6F9FA] border border-slate-200/80 hover:border-teal hover:bg-white hover:shadow-clinical transition-all duration-200 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="w-12 h-12 rounded-2xl bg-teal/15 text-teal font-mono font-black text-lg flex items-center justify-center">
+                      {step.number}
+                    </span>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-teal-dark bg-teal-light/50 px-2.5 py-1 rounded-full">
+                      {teluguStep ? teluguStep.subtitle : step.subtitle}
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-navy mb-2">
+                    {teluguStep ? teluguStep.title : step.title}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                    {teluguStep ? teluguStep.description : step.description}
+                  </p>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-navy mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                  {step.description}
-                </p>
-              </div>
 
-              {step.number === "03" ? (
-                <button
-                  type="button"
-                  onClick={() => setIsReportOpen(true)}
-                  className="mt-6 pt-4 border-t border-slate-200/60 flex items-center justify-between w-full text-xs font-bold text-teal hover:text-teal-dark transition-colors cursor-pointer group/btn"
-                >
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-                    <span>View Sample Report</span>
-                  </span>
-                  <span className="group-hover/btn:translate-x-1 transition-transform font-bold">↗</span>
-                </button>
-              ) : (
-                <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center gap-2 text-xs font-semibold text-teal">
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Zero convenience fee</span>
-                </div>
-              )}
-            </div>
-          ))}
+                {step.number === "03" ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsReportOpen(true)}
+                    className="mt-6 pt-4 border-t border-slate-200/60 flex items-center justify-between w-full text-xs font-bold text-teal hover:text-teal-dark transition-colors cursor-pointer group/btn"
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
+                      <span>{isHomeCollectionTelugu ? "నమూనా రిపోర్ట్ చూడండి" : "View Sample Report"}</span>
+                    </span>
+                    <span className="group-hover/btn:translate-x-1 transition-transform font-bold">↗</span>
+                  </button>
+                ) : (
+                  <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center gap-2 text-xs font-semibold text-teal">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{isHomeCollectionTelugu ? "ఉచిత సర్వీస్ • ₹0 అదనపు ఫీజు" : "Zero convenience fee"}</span>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* ─── Official Sample Lab Report Showcase Card ─── */}

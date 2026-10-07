@@ -3,11 +3,15 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useOpenStatus } from "@/hooks/useOpenStatus";
 import { OFFICIAL_PACKAGES, CONTACT, SITE } from "@/data/site";
+import { useLanguage, SectionLangToggle } from "@/context/LanguageContext";
+import { TELUGU_CONTENT } from "@/data/telugu";
 
 export default function Hero() {
   const isOpen = useOpenStatus();
   const prefersReducedMotion = useReducedMotion();
   const skip = !!prefersReducedMotion;
+  const { isTelugu } = useLanguage();
+  const teluguHero = isTelugu("hero");
 
   function selectAndBook(pkgId: string) {
     const el = document.getElementById("booking");
@@ -27,7 +31,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative bg-gradient-to-b from-[#EEF7F5] via-[#F6FAF9] to-[#F6F9FA] text-foreground pt-32 pb-14 sm:pt-40 sm:pb-20 overflow-hidden border-b border-slate-200/70"
+      className="relative bg-gradient-to-b from-[#EEF7F5] via-[#F6FAF9] to-[#F6F9FA] text-foreground pt-28 pb-14 sm:pt-36 sm:pb-20 overflow-hidden border-b border-slate-200/70"
     >
       {/* Subtle clinical blueprint grid */}
       <div
@@ -46,7 +50,7 @@ export default function Hero() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full min-w-0">
           {/* ─── Left Column: Headline & Action CTAs ─── */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-6 max-w-2xl w-full min-w-0">
-            {/* Live Operational Status & Free Collection Announcement */}
+            {/* Live Operational Status, ISO Certification & Telugu Language Toggle */}
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-white/95 border border-slate-200 shadow-2xs text-slate-700 max-w-full">
                 <span
@@ -55,7 +59,9 @@ export default function Hero() {
                   }`}
                   aria-hidden="true"
                 />
-                <span className="truncate">{isOpen ? "Open Now • 6 AM – 8 PM" : "Closed • Opens 6 AM"} • Free Pickup</span>
+                <span className="truncate">
+                  {isOpen ? "Open Now • 6 AM – 8 PM" : "Closed • Opens 6 AM"} • Free Pickup
+                </span>
               </div>
 
               <button
@@ -69,30 +75,63 @@ export default function Hero() {
                 title="View ISO 9001:2015 Official Certificate"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shrink-0" />
-                <span>ISO 9001:2015 Certified ↗</span>
+                <span>ISO 9001:2015 ↗</span>
               </button>
+
+              {/* 1-Tap Telugu Toggle for Hero Headline & Promises */}
+              <SectionLangToggle section="hero" size="xs" />
             </div>
 
             {/* Main High-Impact Headline */}
             <h1 className="font-heading text-2xl sm:text-4xl lg:text-[3.25rem] font-bold tracking-tight text-navy leading-[1.2] sm:leading-[1.15] break-words">
-              Accurate blood diagnostics,
-              <br className="hidden sm:inline" />
-              <span className="text-teal font-normal italic"> right at your doorstep.</span>
+              {teluguHero ? (
+                <>
+                  {TELUGU_CONTENT.hero.headlinePart1}
+                  <br className="hidden sm:inline" />
+                  <span className="text-teal font-normal italic">
+                    {TELUGU_CONTENT.hero.headlinePart2}
+                  </span>
+                </>
+              ) : (
+                <>
+                  Accurate blood diagnostics,
+                  <br className="hidden sm:inline" />
+                  <span className="text-teal font-normal italic"> right at your doorstep.</span>
+                </>
+              )}
             </h1>
 
             {/* Subtext */}
             <p className="text-sm sm:text-lg text-slate-600 leading-relaxed font-normal">
-              Official health packages starting from <strong className="text-navy font-bold">₹400</strong> • 100+ tests from <strong className="text-navy font-bold">₹50</strong>.
-              Trained phlebotomists collect sterile samples at your home or clinic with{" "}
-              <a
-                href="#home-collection"
-                className="text-teal hover:text-teal-dark hover:underline font-bold inline-flex items-center gap-0.5"
-                title="View authentic WhatsApp sample report preview"
-              >
-                <span>same-day WhatsApp reports</span>
-                <span className="text-xs font-bold">↗</span>
-              </a>
-              .
+              {teluguHero ? (
+                <>
+                  అధికారిక హెల్త్ ప్యాకేజీలు <strong className="text-navy font-bold">₹400</strong> నుంచే • 100+ ల్యాబ్ టెస్టులు <strong className="text-navy font-bold">₹50</strong> నుంచే.
+                  శ్రీకాళహస్తిలో ₹0 ఉచిత డోర్‌స్టెప్ కలెక్షన్ తో{" "}
+                  <a
+                    href="#home-collection"
+                    className="text-teal hover:text-teal-dark hover:underline font-bold inline-flex items-center gap-0.5"
+                    title="View authentic WhatsApp sample report preview"
+                  >
+                    <span>అదే రోజు వాట్సాప్ రిపోర్టులు</span>
+                    <span className="text-xs font-bold">↗</span>
+                  </a>
+                  .
+                </>
+              ) : (
+                <>
+                  Official health packages starting from <strong className="text-navy font-bold">₹400</strong> • 100+ tests from <strong className="text-navy font-bold">₹50</strong>.
+                  Trained phlebotomists collect sterile samples at your home or clinic with{" "}
+                  <a
+                    href="#home-collection"
+                    className="text-teal hover:text-teal-dark hover:underline font-bold inline-flex items-center gap-0.5"
+                    title="View authentic WhatsApp sample report preview"
+                  >
+                    <span>same-day WhatsApp reports</span>
+                    <span className="text-xs font-bold">↗</span>
+                  </a>
+                  .
+                </>
+              )}
             </p>
 
             {/* Action Buttons: Responsive Stack on Mobile */}
@@ -164,7 +203,9 @@ export default function Hero() {
             <div className="flex items-center gap-2 text-xs text-slate-700 bg-white/95 border border-teal/30 px-3.5 py-2.5 rounded-2xl shadow-2xs w-full min-w-0">
               <span className="text-base shrink-0">📸</span>
               <span className="truncate font-medium">
-                Have a doctor&apos;s prescription slip? Snap photo &amp; send:
+                {teluguHero
+                  ? TELUGU_CONTENT.hero.prescriptionCallout
+                  : "Have a doctor's prescription slip? Snap photo & send:"}
               </span>
               <a
                 href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
@@ -174,7 +215,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="font-bold text-teal-dark hover:text-teal hover:underline ml-auto shrink-0 inline-flex items-center gap-1"
               >
-                <span>WhatsApp Quote</span>
+                <span>{teluguHero ? TELUGU_CONTENT.hero.prescriptionCta : "WhatsApp Quote"}</span>
                 <span>↗</span>
               </a>
             </div>
@@ -183,15 +224,21 @@ export default function Hero() {
             <div className="pt-5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full min-w-0">
               <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
                 <span className="block text-lg sm:text-xl font-extrabold text-teal font-mono">₹0</span>
-                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">Home Sample Pickup</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">
+                  {teluguHero ? TELUGU_CONTENT.hero.freeHomePickupPill : "Home Sample Pickup"}
+                </span>
               </div>
               <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
                 <span className="block text-lg sm:text-xl font-extrabold text-navy font-mono">100</span>
-                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">Diagnostic Tests</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">
+                  {teluguHero ? TELUGU_CONTENT.hero.testsCountPill : "Diagnostic Tests"}
+                </span>
               </div>
               <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
                 <span className="block text-lg sm:text-xl font-extrabold text-emerald-600 font-mono">6 AM</span>
-                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">Early Morning Pickup</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">
+                  {teluguHero ? TELUGU_CONTENT.hero.earlyMorningPill : "Early Morning Pickup"}
+                </span>
               </div>
               <a
                 href="#accreditation"
