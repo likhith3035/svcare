@@ -65,6 +65,19 @@ export default function Hero() {
                 </svg>
                 <span>Free Doorstep Collection in Srikalahasti</span>
               </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById("accreditation");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  window.dispatchEvent(new CustomEvent("open-certificate-modal"));
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-navy hover:bg-navy-light text-white border border-teal/30 shadow-2xs transition-colors cursor-pointer"
+                title="View ISO 9001:2015 Official Certificate"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
+                <span>ISO 9001:2015 Certified ↗</span>
+              </button>
             </div>
 
             {/* Main High-Impact Headline */}
@@ -137,10 +150,14 @@ export default function Hero() {
                 <span className="block text-xl font-extrabold text-emerald-600 font-mono">6 AM</span>
                 <span className="text-xs text-slate-600 font-semibold">Early Morning Pickup</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs">
-                <span className="block text-xl font-extrabold text-navy font-mono">MD</span>
-                <span className="text-xs text-slate-600 font-semibold">Doctor On-Site</span>
-              </div>
+              <a
+                href="#accreditation"
+                className="p-2.5 rounded-xl bg-white/80 border border-teal/30 hover:border-teal shadow-2xs transition-colors group block"
+                title="ISO 9001:2015 Certified Pathology Laboratory"
+              >
+                <span className="block text-xl font-extrabold text-navy font-mono group-hover:text-teal">ISO</span>
+                <span className="text-xs text-slate-600 font-semibold group-hover:text-navy">9001:2015 Certified</span>
+              </a>
             </div>
           </div>
 
@@ -240,12 +257,21 @@ export default function Hero() {
 
               {/* Bottom Assurance */}
               <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <span className="flex items-center gap-1.5 font-medium">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById("accreditation");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                    window.dispatchEvent(new CustomEvent("open-certificate-modal"));
+                  }}
+                  className="flex items-center gap-1.5 font-bold text-navy hover:text-teal transition-colors cursor-pointer"
+                  title="Click to view ISO 9001:2015 certificate"
+                >
                   <svg className="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Certified Pathology Lab
-                </span>
+                  <span>ISO 9001:2015 Certified Lab ↗</span>
+                </button>
                 <span className="font-semibold text-slate-600">6:00 AM – 8:00 PM</span>
               </div>
             </motion.div>

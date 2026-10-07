@@ -40,6 +40,7 @@ export default function Footer() {
                 { label: "Packages", href: "#packages" },
                 { label: "100 Tests (Price List)", href: "#tests" },
                 { label: "Home Collection", href: "#home-collection" },
+                { label: "ISO 9001:2015 Certificate", href: "#accreditation" },
                 { label: "Book a Test", href: "#booking" },
                 { label: "Lab Location", href: "#contact" },
               ].map((link) => (
@@ -103,7 +104,10 @@ export default function Footer() {
         {/* Bottom copyright row */}
         <div className="mt-14 pt-8 border-t border-slate-800 text-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 font-medium">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p>Government Registered Diagnostic Centre • Srikalahasti</p>
+          <p className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal" />
+            <span>ISO 9001:2015 Certified Diagnostic Lab • Reg: EU/QMS/01326</span>
+          </p>
         </div>
       </div>
     </footer>

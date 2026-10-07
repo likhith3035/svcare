@@ -5,10 +5,10 @@ import Tests from "@/components/Tests";
 import HomeCollection from "@/components/HomeCollection";
 import Booking from "@/components/Booking";
 import Contact from "@/components/Contact";
+import Accreditation from "@/components/Accreditation";
 import {
   GoogleReviewsPlaceholder,
   ClinicGalleryPlaceholder,
-  AccreditationsPlaceholder,
 } from "@/components/Placeholders";
 import Footer from "@/components/Footer";
 import MobileBar from "@/components/MobileBar";
@@ -22,6 +22,7 @@ export default function Home() {
         <Packages />
         <Tests />
         <HomeCollection />
+        <Accreditation />
         <Booking />
         <Contact />
 
@@ -32,7 +33,6 @@ export default function Home() {
         */}
         <ClinicGalleryPlaceholder />
         <GoogleReviewsPlaceholder />
-        <AccreditationsPlaceholder />
       </main>
       <Footer />
       <MobileBar />

@@ -6,7 +6,7 @@ export const SITE = {
   motto: "Your Health Our Priority...",
   title: "SV Care Health Diagnostics | 100+ Tests & Health Packages in Srikalahasti",
   description:
-    "SV Care Health Diagnostics is Srikalahasti's trusted diagnostic lab offering 100+ blood tests, health packages from ₹400, and free home sample collection. Open daily 6:00 AM to 8:00 PM.",
+    "SV Care Health Diagnostics is an ISO 9001:2015 certified diagnostic laboratory in Srikalahasti offering 100+ blood tests, health packages from ₹400, and free home sample collection. Open daily 6:00 AM to 8:00 PM.",
   url: "https://svcarediagnostics.in", // ⚠️ UPDATE THIS when the real domain is live — affects sitemap, robots.txt, and JSON-LD schema
   whatsapp: "918019081501",
   whatsappLink: "https://wa.me/918019081501",
@@ -511,12 +511,53 @@ export const MASTER_PACKAGES: Package[] = [
 // Backwards-compatible PACKAGES reference (aliases MASTER_PACKAGES)
 export const PACKAGES = MASTER_PACKAGES;
 
+// ─── Official ISO 9001:2015 Registration Certificate ───
+export const ACCREDITATION = {
+  title: "ISO 9001:2015 Registered Diagnostic Laboratory",
+  standard: "ISO 9001:2015",
+  type: "Quality Management Systems (QMS)",
+  scope: "Activities of Independent Diagnostic / Pathological Laboratories",
+  certificateNumber: "EU/QMS/01326",
+  registeredDate: "06-10-2026",
+  firstAuditDate: "05-10-2027",
+  secondAuditDate: "05-10-2028",
+  recertificationDate: "05-10-2029",
+  accreditedBy: "EU Certification Limited",
+  accreditationAddress: "15 Broadstone House, Dorset Road, London, England SW81AD",
+  companyNumber: "15665772",
+  verificationUrl: "https://www.eucert.co.uk",
+  verificationEmail: "info@eucert.co.uk",
+  imagePath: "/iso-certificate.jpg",
+  pdfPath: "/iso-certificate.pdf",
+  registeredEntity: "S V CARE HEALTH DIAGNOSTICS",
+  registeredAddress:
+    "6-606, PNR CONVENTION HALL GROUND FLOOR, BABUAGRAHARAM, KONERU, SRIKALAHASTHI, TIRUPATI, ANDHRA PRADESH – 517644, INDIA",
+  pillars: [
+    {
+      title: "Calibrated Analyzers",
+      desc: "Daily calibrator and multi-level QC controls run before patient testing.",
+    },
+    {
+      title: "Barcoded Sample Safety",
+      desc: "Vacuum-sealed blood collection tubes with barcode IDs eliminate mix-ups.",
+    },
+    {
+      title: "Cold-Chain Transport",
+      desc: "Temperature-regulated transport boxes preserve sterile blood integrity.",
+    },
+    {
+      title: "Certified Sign-Off",
+      desc: "Independent pathological lab protocols audited under ISO 9001:2015 standards.",
+    },
+  ],
+} as const;
+
 // ─── Placeholders (Feature flags & real Google reference) ───
 export const PLACEHOLDERS = {
   googleReviewUrl: "https://share.google/QEaqybZ73YKzJuLuh",
   showReviews: false, // Set to true once verified patient reviews are ready
   showGallery: false, // Set to true to display clinic photographs
-  showAccreditations: false, // Set to true once official accreditation certificates are issued
+  showAccreditations: true, // Official ISO 9001:2015 certificate issued (EU/QMS/01326)
 } as const;
 
 // ─── Illustrative lab report data for hero animation ───

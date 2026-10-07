@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Packages", href: "#packages" },
   { label: "100 Tests (Price List)", href: "#tests" },
   { label: "Home Collection", href: "#home-collection" },
+  { label: "ISO Certified", href: "#accreditation" },
   { label: "Book a Test", href: "#booking" },
   { label: "Our Lab", href: "#contact" },
 ];
