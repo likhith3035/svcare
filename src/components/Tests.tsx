@@ -186,10 +186,17 @@ export default function Tests() {
 
         {/* ─── Compact Expandable Pre-Test Fasting Guidelines Accordion ─── */}
         <div id="fasting-guide" className="mb-6 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all w-full min-w-0">
-          <button
-            type="button"
+          <div
             onClick={() => setIsFastingGuideOpen((prev) => !prev)}
-            className="w-full p-3.5 sm:p-5 flex items-center justify-between gap-3 text-left hover:bg-slate-50/70 transition-colors cursor-pointer"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setIsFastingGuideOpen((prev) => !prev);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            className="w-full p-3.5 sm:p-5 flex items-center justify-between gap-3 text-left hover:bg-slate-50/70 transition-colors cursor-pointer select-none"
             aria-expanded={isFastingGuideOpen}
           >
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
@@ -226,7 +233,7 @@ export default function Tests() {
                 </svg>
               </div>
             </div>
-          </button>
+          </div>
 
           {isFastingGuideOpen && (
             <div className="px-3.5 pb-4 sm:px-6 sm:pb-6 pt-2 border-t border-slate-100 bg-slate-50/40 animate-fade-in w-full min-w-0">
