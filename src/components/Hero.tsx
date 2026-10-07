@@ -42,20 +42,20 @@ export default function Hero() {
       {/* Luminous glow */}
       <div className="absolute top-1/4 right-5 w-[450px] h-[450px] bg-teal/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 w-full min-w-0">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full min-w-0">
           {/* ─── Left Column: Headline & Action CTAs ─── */}
-          <div className="lg:col-span-7 space-y-5 sm:space-y-6 max-w-2xl">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-6 max-w-2xl w-full min-w-0">
             {/* Live Operational Status & Free Collection Announcement */}
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-white/95 border border-slate-200 shadow-2xs text-slate-700">
+              <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-white/95 border border-slate-200 shadow-2xs text-slate-700 max-w-full">
                 <span
-                  className={`h-2 w-2 rounded-full ${
+                  className={`h-2 w-2 rounded-full shrink-0 ${
                     isOpen ? "bg-emerald-500 animate-pulse" : "bg-red"
                   }`}
                   aria-hidden="true"
                 />
-                <span>{isOpen ? "Open Now • 6 AM – 8 PM" : "Closed • Opens 6 AM"} • Free Pickup</span>
+                <span className="truncate">{isOpen ? "Open Now • 6 AM – 8 PM" : "Closed • Opens 6 AM"} • Free Pickup</span>
               </div>
 
               <button
@@ -65,19 +65,19 @@ export default function Hero() {
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                   window.dispatchEvent(new CustomEvent("open-certificate-modal"));
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-navy hover:bg-navy-light text-white border border-teal/30 shadow-2xs transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-navy hover:bg-navy-light text-white border border-teal/30 shadow-2xs transition-colors cursor-pointer shrink-0"
                 title="View ISO 9001:2015 Official Certificate"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shrink-0" />
                 <span>ISO 9001:2015 Certified ↗</span>
               </button>
             </div>
 
             {/* Main High-Impact Headline */}
-            <h1 className="font-heading text-2xl sm:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-navy leading-[1.2] sm:leading-[1.15]">
+            <h1 className="font-heading text-2xl sm:text-4xl lg:text-[3.25rem] font-bold tracking-tight text-navy leading-[1.2] sm:leading-[1.15] break-words">
               Accurate blood diagnostics,
-              <br />
-              <span className="text-teal font-normal italic">right at your doorstep.</span>
+              <br className="hidden sm:inline" />
+              <span className="text-teal font-normal italic"> right at your doorstep.</span>
             </h1>
 
             {/* Subtext */}
@@ -96,41 +96,41 @@ export default function Hero() {
             </p>
 
             {/* Action Buttons: Responsive Stack on Mobile */}
-            <div className="space-y-2 sm:space-y-0 sm:flex sm:items-center sm:gap-3 pt-1">
+            <div className="space-y-2 sm:space-y-0 sm:flex sm:items-center sm:gap-3 pt-1 w-full min-w-0">
               {/* Primary High-Converting CTA */}
               <a
                 href="#booking"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-bold text-white
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 text-sm sm:text-base font-bold text-white
                   bg-red hover:bg-red-hover rounded-xl shadow-md shadow-red/20 transition-all
                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red
                   active:scale-[0.98] cursor-pointer"
               >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span>Book Home Collection (₹0 Fee)</span>
+                <span className="truncate">Book Home Collection (₹0 Fee)</span>
               </a>
 
               {/* Mobile Exploration Shortcuts (Replaces duplicate call/WhatsApp buttons since sticky bottom bar already has them) */}
               <div className="grid grid-cols-2 gap-2 w-full sm:hidden">
                 <a
                   href="#packages"
-                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold text-navy bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-2.5 rounded-xl text-xs font-bold text-navy bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors min-w-0"
                 >
-                  <span>Packages (₹400)</span>
-                  <span className="text-teal font-black">↓</span>
+                  <span className="truncate">Packages (₹400)</span>
+                  <span className="text-teal font-black shrink-0">↓</span>
                 </a>
                 <a
                   href="#tests"
-                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold text-navy bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-2.5 rounded-xl text-xs font-bold text-navy bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors min-w-0"
                 >
-                  <span>100 Tests (₹50)</span>
-                  <span className="text-teal font-black">↓</span>
+                  <span className="truncate">100 Tests (₹50)</span>
+                  <span className="text-teal font-black shrink-0">↓</span>
                 </a>
               </div>
 
               {/* Desktop/Tablet Direct WhatsApp & Phone CTAs */}
-              <div className="hidden sm:flex sm:items-center sm:gap-3">
+              <div className="hidden sm:flex sm:items-center sm:gap-3 shrink-0">
                 <a
                   href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hello SV Care Health Diagnostics, I would like to book a blood test appointment.")}`}
                   target="_blank"
@@ -161,58 +161,58 @@ export default function Hero() {
             </div>
 
             {/* Diagnostic Trust Metrics Pillars */}
-            <div className="pt-5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
-              <div className="p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs">
-                <span className="block text-xl font-extrabold text-teal font-mono">₹0</span>
-                <span className="text-xs text-slate-600 font-semibold">Home Sample Pickup</span>
+            <div className="pt-5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full min-w-0">
+              <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
+                <span className="block text-lg sm:text-xl font-extrabold text-teal font-mono">₹0</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">Home Sample Pickup</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs">
-                <span className="block text-xl font-extrabold text-navy font-mono">100</span>
-                <span className="text-xs text-slate-600 font-semibold">Diagnostic Tests</span>
+              <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
+                <span className="block text-lg sm:text-xl font-extrabold text-navy font-mono">100</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">Diagnostic Tests</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs">
-                <span className="block text-xl font-extrabold text-emerald-600 font-mono">6 AM</span>
-                <span className="text-xs text-slate-600 font-semibold">Early Morning Pickup</span>
+              <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
+                <span className="block text-lg sm:text-xl font-extrabold text-emerald-600 font-mono">6 AM</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">Early Morning Pickup</span>
               </div>
               <a
                 href="#accreditation"
-                className="p-2.5 rounded-xl bg-white/80 border border-teal/30 hover:border-teal shadow-2xs transition-colors group block"
+                className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-teal/30 hover:border-teal shadow-2xs transition-colors group block min-w-0 overflow-hidden"
                 title="ISO 9001:2015 Certified Pathology Laboratory"
               >
-                <span className="block text-xl font-extrabold text-navy font-mono group-hover:text-teal">ISO</span>
-                <span className="text-xs text-slate-600 font-semibold group-hover:text-navy">9001:2015 Certified</span>
+                <span className="block text-lg sm:text-xl font-extrabold text-navy font-mono group-hover:text-teal">ISO</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-semibold group-hover:text-navy leading-tight block truncate">9001:2015 Certified</span>
               </a>
             </div>
           </div>
 
           {/* ─── Right Column: Interactive Diagnostic Quick-Selector ─── */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          <div className="lg:col-span-5 flex justify-center lg:justify-end w-full min-w-0">
             <motion.div
-              className="w-full max-w-[440px] bg-white rounded-2xl shadow-clinical border border-slate-200/90 overflow-hidden"
+              className="w-full max-w-full sm:max-w-[440px] bg-white rounded-2xl shadow-clinical border border-slate-200/90 overflow-hidden min-w-0"
               initial={skip ? {} : { opacity: 0, y: 25 }}
               animate={skip ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
               {/* Card Header */}
-              <div className="bg-navy text-white px-5 py-4 border-b border-navy-light flex items-center justify-between">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-teal-light">
+              <div className="bg-navy text-white px-3.5 py-3 sm:px-5 sm:py-4 border-b border-navy-light flex items-center justify-between gap-2 min-w-0">
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="w-2 h-2 rounded-full bg-teal animate-pulse shrink-0" />
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-teal-light truncate">
                       Popular Health Packages
                     </span>
                   </div>
-                  <h2 className="text-base font-bold text-white mt-0.5">
+                  <h2 className="text-sm sm:text-base font-bold text-white mt-0.5 truncate">
                     Preventive Health Screenings
                   </h2>
                 </div>
-                <span className="text-[10px] font-mono font-bold bg-white/10 px-2.5 py-1 rounded-md text-slate-200">
+                <span className="text-[10px] font-mono font-bold bg-white/10 px-2 sm:px-2.5 py-1 rounded-md text-slate-200 shrink-0">
                   From ₹400
                 </span>
               </div>
 
               {/* 3 Interactive Quick Package Rows */}
-              <div className="p-4 sm:p-5 space-y-3">
+              <div className="p-3 sm:p-5 space-y-2.5 sm:space-y-3 min-w-0">
                 {featuredPackages.map((pkg) => {
                   const discount = pkg.originalPrice
                     ? Math.round(((pkg.originalPrice - pkg.price) / pkg.originalPrice) * 100)
@@ -222,41 +222,41 @@ export default function Hero() {
                     <div
                       key={pkg.id}
                       onClick={() => selectAndBook(pkg.id)}
-                      className={`group p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                      className={`group p-2.5 sm:p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 sm:gap-3 min-w-0 ${
                         pkg.isPopular
                           ? "bg-teal-light/40 border-teal hover:border-teal-dark hover:bg-teal-light/60 shadow-xs"
                           : "bg-slate-50/70 border-slate-200 hover:border-slate-300 hover:bg-slate-100/70"
                       }`}
                     >
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-sm text-navy truncate">
+                        <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                          <span className="font-bold text-xs sm:text-sm text-navy truncate">
                             {pkg.name}
                           </span>
                           {pkg.isPopular && (
-                            <span className="text-[10px] font-extrabold uppercase tracking-wider bg-teal text-white px-2 py-0.5 rounded-full">
+                            <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-teal text-white px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
                               Popular
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-slate-500 mt-0.5 truncate">
+                        <div className="text-[11px] sm:text-xs text-slate-500 mt-0.5 truncate">
                           {pkg.inclusions}
                         </div>
                       </div>
 
                       <div className="text-right shrink-0">
-                        <div className="flex items-baseline gap-1.5 justify-end">
+                        <div className="flex items-baseline gap-1 sm:gap-1.5 justify-end">
                           {pkg.originalPrice && (
-                            <span className="text-xs line-through text-slate-400 font-mono">
+                            <span className="text-[11px] sm:text-xs line-through text-slate-400 font-mono">
                               ₹{pkg.originalPrice}
                             </span>
                           )}
-                          <span className="text-lg font-black text-navy font-mono tabular-nums">
+                          <span className="text-base sm:text-lg font-black text-navy font-mono tabular-nums">
                             ₹{pkg.price}
                           </span>
                         </div>
                         {discount && (
-                          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-1.5 py-0.5 rounded">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-1.5 py-0.5 rounded inline-block">
                             {discount}% OFF
                           </span>
                         )}
@@ -266,13 +266,13 @@ export default function Hero() {
                 })}
 
                 {/* Direct Action */}
-                <div className="pt-2">
+                <div className="pt-1 sm:pt-2">
                   <a
                     href="#packages"
-                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold text-navy bg-slate-100 hover:bg-slate-200/80 transition-colors"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-bold text-navy bg-slate-100 hover:bg-slate-200/80 transition-colors"
                   >
                     <span>View All 7 Packages & 100 Tests</span>
-                    <svg className="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                   </a>
@@ -280,7 +280,7 @@ export default function Hero() {
               </div>
 
               {/* Bottom Assurance */}
-              <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <div className="px-3.5 py-2.5 sm:px-5 sm:py-3 bg-slate-50 border-t border-slate-100 flex flex-wrap items-center justify-between gap-1.5 text-xs text-slate-500 min-w-0">
                 <button
                   type="button"
                   onClick={() => {
@@ -288,15 +288,15 @@ export default function Hero() {
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                     window.dispatchEvent(new CustomEvent("open-certificate-modal"));
                   }}
-                  className="flex items-center gap-1.5 font-bold text-navy hover:text-teal transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 font-bold text-navy hover:text-teal transition-colors cursor-pointer text-[11px] sm:text-xs min-w-0"
                   title="Click to view ISO 9001:2015 certificate"
                 >
-                  <svg className="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>ISO 9001:2015 Certified Lab ↗</span>
+                  <span className="truncate">ISO 9001:2015 Certified Lab ↗</span>
                 </button>
-                <span className="font-semibold text-slate-600">6:00 AM – 8:00 PM</span>
+                <span className="font-semibold text-slate-600 text-[11px] sm:text-xs shrink-0">6:00 AM – 8:00 PM</span>
               </div>
             </motion.div>
           </div>
