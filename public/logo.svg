@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" fill="none">
+  <rect width="400" height="80" fill="transparent"/>
+  <!-- S V letters -->
+  <text x="10" y="55" font-family="Arial, sans-serif" font-size="42" font-weight="bold">
+    <tspan fill="#1B3A63">S</tspan>
+    <tspan fill="#1E9C80">V</tspan>
+  </text>
+  <!-- Divider -->
+  <line x1="70" y1="15" x2="70" y2="65" stroke="#1B3A63" stroke-width="1.5" opacity="0.3"/>
+  <!-- Care Health -->
+  <text x="82" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1B3A63">CARE HEALTH</text>
+  <!-- Diagnostics -->
+  <text x="82" y="60" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#1B3A63" letter-spacing="3">DIAGNOSTICS</text>
+  <!-- Blood drop accent -->
+  <path d="M52 15 C52 15 48 22 48 26 C48 28.2 49.8 30 52 30 C54.2 30 56 28.2 56 26 C56 22 52 15 52 15Z" fill="#B3202A"/>
+</svg>
