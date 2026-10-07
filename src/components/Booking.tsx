@@ -8,6 +8,9 @@ import {
   LAB_TESTS,
   TEST_CATEGORIES,
   COLLECTION_PLACES,
+  BOOKING_FOR_OPTIONS,
+  BookingFor,
+  FASTING_GUIDELINES,
   SITE,
   CONTACT,
 } from "@/data/site";
@@ -15,6 +18,7 @@ import {
 type FormData = {
   name: string;
   phone: string;
+  bookingFor: BookingFor;
   packageOrTest: string;
   date: string;
   time: string;
@@ -66,6 +70,7 @@ export default function Booking() {
   const [form, setForm] = useState<FormData>({
     name: "",
     phone: "",
+    bookingFor: "Self",
     packageOrTest: "",
     date: "",
     time: "",
@@ -163,16 +168,35 @@ export default function Booking() {
       ? `${selectedItemName} (₹${selectedItemPrice})`
       : selectedItemName || form.packageOrTest;
 
+    const bookingForLine =
+      form.bookingFor === "Parents / Elders"
+        ? `• Booking For: Parents / Elders (Elderly Doorstep Care)\n`
+        : form.bookingFor === "Child"
+        ? `• Booking For: Child (Pediatric Home Visit)\n`
+        : form.bookingFor === "Family Member"
+        ? `• Booking For: Family Member\n`
+        : `• Booking For: Self\n`;
+
+    const relationPrompt =
+      form.bookingFor === "Parents / Elders"
+        ? `for my elderly parents`
+        : form.bookingFor === "Child"
+        ? `for my child`
+        : form.bookingFor === "Family Member"
+        ? `for a family member`
+        : `for myself`;
+
     const message =
       `Hello SV Care Health Diagnostics,\n` +
-      `I would like to book a laboratory appointment:\n\n` +
+      `I would like to book a laboratory appointment ${relationPrompt}:\n\n` +
       `• Patient Name: ${form.name.trim()}\n` +
-      `• Mobile: ${form.phone.trim()}\n` +
+      bookingForLine +
+      `• WhatsApp Mobile: ${form.phone.trim()}\n` +
       `• Test/Package: ${itemLabel}\n` +
-      `• Date: ${form.date}\n` +
+      `• Preferred Date: ${form.date}\n` +
       `• Time Slot: ${form.time}\n` +
-      `• Sample Collection: ${form.place} (Free Collection)\n` +
-      (requiresFasting ? `• Fasting: Patient informed of 10-12 hr fasting advice\n\n` : `\n`) +
+      `• Sample Collection: ${form.place} (Free Doorstep Pickup)\n` +
+      (requiresFasting ? `• Fasting: Patient informed of 8–10 hr overnight fasting instructions\n\n` : `\n`) +
       `Please confirm my appointment slot.`;
 
     const url = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
@@ -207,10 +231,46 @@ export default function Booking() {
             </p>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-5">
-              {/* Patient Full Name */}
+              {/* Who is this booking for? (1-tap chip selector) */}
+              <div>
+                <label className="block text-xs font-bold text-navy uppercase tracking-wider mb-2">
+                  Who is this booking for?
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full min-w-0">
+                  {BOOKING_FOR_OPTIONS.map((opt) => {
+                    const isSelected = form.bookingFor === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => updateField("bookingFor", opt.id)}
+                        className={`py-2 px-2 sm:px-3 rounded-xl text-xs font-bold transition-all text-center border cursor-pointer flex flex-col items-center justify-center gap-0.5 min-w-0 overflow-hidden ${
+                          isSelected
+                            ? "bg-teal text-white border-teal shadow-xs shadow-teal/20"
+                            : "bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200"
+                        }`}
+                      >
+                        <span className="leading-tight truncate w-full">{opt.label}</span>
+                        <span className={`text-[10px] font-normal leading-tight truncate w-full ${isSelected ? "text-white/85" : "text-slate-400"}`}>
+                          {opt.description}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Patient Full Name (Dynamically adjusted based on Booking For) */}
               <div>
                 <label htmlFor="booking-name" className="block text-xs font-bold text-navy uppercase tracking-wider mb-1.5">
-                  Patient Full Name <span className="text-red">*</span>
+                  {form.bookingFor === "Parents / Elders"
+                    ? "Parent / Elder's Full Name"
+                    : form.bookingFor === "Child"
+                    ? "Child's Full Name & Age"
+                    : form.bookingFor === "Family Member"
+                    ? "Family Member's Full Name"
+                    : "Patient Full Name"}{" "}
+                  <span className="text-red">*</span>
                 </label>
                 <input
                   id="booking-name"
@@ -220,7 +280,15 @@ export default function Booking() {
                   className={`w-full px-4 py-3 rounded-xl bg-slate-50/70 border text-slate-900 text-sm font-medium
                     placeholder:text-slate-400 outline-none transition-all
                     ${errors.name ? "border-red ring-2 ring-red/20" : "border-slate-200 focus:border-teal focus:ring-2 focus:ring-teal/20"}`}
-                  placeholder="e.g. Ramesh Kumar"
+                  placeholder={
+                    form.bookingFor === "Parents / Elders"
+                      ? "e.g. Father / Mother Name (e.g. Lakshmi Devi)"
+                      : form.bookingFor === "Child"
+                      ? "e.g. Child Name & Age (e.g. Aarav, 8 Yrs)"
+                      : form.bookingFor === "Family Member"
+                      ? "e.g. Spouse / Relative Name"
+                      : "e.g. Ramesh Kumar"
+                  }
                   autoComplete="name"
                 />
                 {errors.name && <p className="mt-1 text-xs text-red font-semibold">{errors.name}</p>}
@@ -331,13 +399,23 @@ export default function Booking() {
 
                 {/* Fasting Notice */}
                 {requiresFasting && (
-                  <div className="mt-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200/80 text-xs text-amber-900 flex items-start gap-2">
-                    <svg className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                    <span>
-                      <strong>Fasting Recommended:</strong> 10–12 hours overnight fasting (water permitted) is recommended for accurate metabolic & lipid parameters.
-                    </span>
+                  <div className="mt-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200/80 text-xs text-amber-900 flex items-start justify-between gap-2.5">
+                    <div className="flex items-start gap-2">
+                      <svg className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <div>
+                        <p>
+                          <strong>8–10 Hr Overnight Fasting Required:</strong> Plain water permitted. Avoid breakfast, tea, milk, or coffee prior to morning draw.
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      href="#fasting-guide"
+                      className="text-amber-800 hover:text-amber-950 font-bold underline shrink-0 text-[11px]"
+                    >
+                      View Guide ↗
+                    </a>
                   </div>
                 )}
               </div>
@@ -448,7 +526,44 @@ export default function Booking() {
           </div>
 
           {/* ─── Sidebar Column ─── */}
-          <aside className="lg:col-span-5 space-y-4">
+          <aside className="lg:col-span-5 space-y-4 w-full min-w-0">
+            {/* Upload Doctor's Prescription Slip Card (Top Conversion Driver) */}
+            <div className="bg-gradient-to-br from-teal/10 via-emerald-50/60 to-white border-2 border-teal/40 p-5 sm:p-6 rounded-3xl shadow-clinical relative overflow-hidden w-full min-w-0">
+              <div className="flex items-start gap-3 sm:gap-3.5 mb-3 min-w-0">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-teal text-white flex items-center justify-center shrink-0 shadow-sm shadow-teal/30">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div className="min-w-0">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-teal text-white uppercase tracking-wider mb-1">
+                    📸 1-Tap Prescription Order
+                  </div>
+                  <h3 className="font-heading text-base sm:text-lg font-bold text-navy leading-snug break-words">
+                    Have a Doctor&apos;s Prescription Slip?
+                  </h3>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mb-4 break-words">
+                Don&apos;t worry about searching specific test names. Just snap a photo of your doctor&apos;s prescription slip and send it on WhatsApp. We will verify every test, give you an instant discounted quote, and schedule doorstep collection.
+              </p>
+              <a
+                href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
+                  "Hello SV Care Health Diagnostics, I am sharing a photo of my doctor's prescription slip. Please verify the prescribed tests, calculate the discounted total, and schedule doorstep collection."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20BA5A] text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-500/20 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.69 0-3.259-.52-4.555-1.408l-.327-.194-2.871.852.852-2.871-.194-.327A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+                </svg>
+                <span>Send Prescription on WhatsApp</span>
+              </a>
+            </div>
+
             {/* Timings & Highlights Card */}
             <div className="bg-navy text-white p-6 rounded-3xl shadow-clinical">
               <div className="flex items-center gap-3 mb-3">

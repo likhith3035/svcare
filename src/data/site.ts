@@ -626,3 +626,57 @@ export const SAMPLE_REPORT = {
     { name: "Total Cholesterol", value: "168", unit: "mg/dL", status: "Normal" },
   ],
 } as const;
+
+// ─── Booking For Options ───
+export const BOOKING_FOR_OPTIONS = [
+  { id: "Self", label: "Self", description: "For myself" },
+  { id: "Parents / Elders", label: "Parents / Elders", description: "Elderly home visit" },
+  { id: "Child", label: "Child", description: "Pediatric draw" },
+  { id: "Family Member", label: "Family Member", description: "Spouse or relative" },
+] as const;
+export type BookingFor = (typeof BOOKING_FOR_OPTIONS)[number]["id"];
+
+// ─── Pre-Test Fasting & Preparation Guidelines ───
+export const FASTING_GUIDELINES = [
+  {
+    id: "fbs-lipid",
+    category: "Fasting Sugar (FBS) & Lipid Profile",
+    rule: "8–10 Hours Overnight Fasting Required",
+    details: "Do not consume food, tea, coffee, milk, or breakfast for 8–10 hours before morning collection. Plain water is permitted and encouraged to keep veins well hydrated.",
+    badge: "Strict Fasting",
+    type: "fasting",
+  },
+  {
+    id: "hba1c-cbc",
+    category: "HbA1c & Complete Blood Count (CBC)",
+    rule: "No Fasting Required (Anytime Test)",
+    details: "Can be collected at any time of day, before or after food. Dietary intake does not alter glycated hemoglobin or complete blood count cellular parameters.",
+    badge: "No Fasting",
+    type: "anytime",
+  },
+  {
+    id: "thyroid",
+    category: "Thyroid Profile (TSH, Total T3, T4)",
+    rule: "Early Morning Sample Before Medication",
+    details: "Blood should ideally be drawn in the morning (before 10:00 AM). If you take daily thyroid medication (Thyronorm/Eltroxin), give the blood sample before taking your morning tablet.",
+    badge: "Pre-Medication",
+    type: "morning",
+  },
+  {
+    id: "rft-lft",
+    category: "Kidney (RFT) & Liver (LFT) Function",
+    rule: "Light Normal Meal Permitted",
+    details: "Standard meals permitted unless combined with fasting glucose. Avoid unusually heavy protein feasts or heavy exercise immediately prior to the test.",
+    badge: "Routine",
+    type: "routine",
+  },
+  {
+    id: "urine",
+    category: "Urine Routine & Microscopic Analysis",
+    rule: "First Morning Clean-Catch Sample",
+    details: "Early morning mid-stream urine in a sterile container provided by SV Care yields maximum clinical accuracy for protein, sediment, and microscopic parameters.",
+    badge: "Sterile Cup",
+    type: "sterile",
+  },
+] as const;
+

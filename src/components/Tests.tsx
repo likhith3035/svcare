@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { LAB_TESTS, LabTest, LabTestCategory, SITE, CONTACT, FLYER_DATA } from "@/data/site";
+import { LAB_TESTS, LabTest, LabTestCategory, SITE, CONTACT, FLYER_DATA, FASTING_GUIDELINES } from "@/data/site";
 
 const CATEGORIES: { label: string; value: string }[] = [
   { label: "All Tests", value: "All" },
@@ -26,6 +26,7 @@ export default function Tests() {
   const [popularOnly, setPopularOnly] = useState(false);
   const [under300Only, setUnder300Only] = useState(false);
   const [isFlyerModalOpen, setIsFlyerModalOpen] = useState(false);
+  const [isFastingGuideOpen, setIsFastingGuideOpen] = useState(false);
 
   // Listen for flyer modal opening triggers from other sections
   useEffect(() => {
@@ -112,20 +113,154 @@ export default function Tests() {
         </div>
 
         {/* 5 Laboratory Trust Pillars (from Flyer) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 mb-8 w-full min-w-0">
           {FLYER_DATA.pillars.map((pillar, idx) => (
             <div
               key={idx}
-              className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center gap-2.5"
+              className="p-2.5 sm:p-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center gap-2 sm:gap-2.5 min-w-0 overflow-hidden"
             >
               <div className="w-7 h-7 rounded-lg bg-teal/10 text-teal flex items-center justify-center shrink-0">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span className="text-xs font-bold text-navy leading-tight">{pillar.title}</span>
+              <span className="text-[11px] sm:text-xs font-bold text-navy leading-tight truncate">{pillar.title}</span>
             </div>
           ))}
+        </div>
+
+        {/* ─── Doctor's Prescription WhatsApp Upload Banner (Top Conversion Driver) ─── */}
+        <div className="mb-6 p-4 sm:p-7 rounded-3xl bg-gradient-to-r from-navy via-navy-light to-teal/90 text-white shadow-clinical border border-teal/30 relative overflow-hidden w-full min-w-0">
+          <div className="absolute -right-10 -bottom-10 w-56 h-56 bg-teal/20 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6 w-full min-w-0">
+            <div className="flex items-start gap-3 sm:gap-4 max-w-2xl min-w-0">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-teal/25 border border-teal/40 text-teal-light flex items-center justify-center shrink-0 shadow-inner">
+                <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold bg-teal text-white uppercase tracking-wider mb-1.5 shadow-2xs">
+                  <span>📸 Instant Prescription Quote</span>
+                </div>
+                <h3 className="font-heading text-base sm:text-2xl font-bold text-white leading-tight break-words">
+                  Have a Doctor&apos;s Prescription Slip?
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-200 mt-1.5 leading-relaxed font-normal break-words">
+                  Don&apos;t know the exact test names to search? Just snap a photo of your doctor&apos;s prescription slip and send it on WhatsApp. We&apos;ll verify the tests, give you an instant discounted quote, and schedule doorstep pickup in Srikalahasti.
+                </p>
+              </div>
+            </div>
+
+            <div className="shrink-0 w-full sm:w-auto">
+              <a
+                href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
+                  "Hello SV Care Health Diagnostics, I am sending a photo of my doctor's prescription slip. Please verify the prescribed tests, calculate the discounted total, and schedule doorstep collection."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20BA5A] text-white text-xs sm:text-sm font-bold shadow-lg shadow-emerald-500/25 transition-all active:scale-[0.98] cursor-pointer w-full sm:w-auto"
+              >
+                <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.69 0-3.259-.52-4.555-1.408l-.327-.194-2.871.852.852-2.871-.194-.327A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+                </svg>
+                <span>Send Prescription on WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── Compact Expandable Pre-Test Fasting Guidelines Accordion ─── */}
+        <div id="fasting-guide" className="mb-6 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all w-full min-w-0">
+          <button
+            type="button"
+            onClick={() => setIsFastingGuideOpen((prev) => !prev)}
+            className="w-full p-3.5 sm:p-5 flex items-center justify-between gap-3 text-left hover:bg-slate-50/70 transition-colors cursor-pointer"
+            aria-expanded={isFastingGuideOpen}
+          >
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h3 className="font-heading text-xs sm:text-base font-bold text-navy truncate">
+                    Pre-Test Fasting &amp; Preparation Guide
+                  </h3>
+                  <span className="text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full bg-teal/10 text-teal-dark shrink-0 hidden xs:inline-block">
+                    Clinical Advice
+                  </span>
+                </div>
+                <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">
+                  Do you need to skip breakfast, drink water, or pause morning medication?
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-xs font-bold text-teal hidden sm:inline-block">
+                {isFastingGuideOpen ? "Collapse Guide" : "Expand Guide (5 Categories)"}
+              </span>
+              <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 transition-transform duration-200 shrink-0 ${isFastingGuideOpen ? "rotate-180 bg-teal text-white" : ""}`}>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </button>
+
+          {isFastingGuideOpen && (
+            <div className="px-3.5 pb-4 sm:px-6 sm:pb-6 pt-2 border-t border-slate-100 bg-slate-50/40 animate-fade-in w-full min-w-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2 w-full min-w-0">
+                {FASTING_GUIDELINES.map((item) => (
+                  <div
+                    key={item.id}
+                    className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/90 shadow-2xs flex flex-col justify-between min-w-0"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <span className="text-xs font-bold text-navy leading-tight truncate">
+                          {item.category}
+                        </span>
+                        <span
+                          className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md shrink-0 ${
+                            item.badge === "Strict Fasting"
+                              ? "bg-amber-100 text-amber-800"
+                              : item.badge === "No Fasting"
+                              ? "bg-emerald-100 text-emerald-800"
+                              : item.badge === "Pre-Medication"
+                              ? "bg-indigo-100 text-indigo-800"
+                              : "bg-slate-100 text-slate-700"
+                          }`}
+                        >
+                          {item.badge}
+                        </span>
+                      </div>
+                      <p className="text-xs font-bold text-teal-dark mb-1">
+                        {item.rule}
+                      </p>
+                      <p className="text-[11px] text-slate-600 leading-relaxed font-normal">
+                        {item.details}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Water & Hydration Note */}
+              <div className="mt-3.5 p-3 rounded-xl bg-teal/10 border border-teal/20 flex items-start gap-2.5 text-xs text-navy w-full min-w-0">
+                <span className="text-base shrink-0 mt-0.5">💧</span>
+                <p className="leading-relaxed">
+                  <strong>Water is always permitted:</strong> Drinking 1–2 glasses of normal plain water before blood collection is encouraged. It keeps veins well-hydrated for easy, painless single-prick sampling.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Search Bar + Quick Toggle Pills */}
@@ -289,9 +424,18 @@ export default function Tests() {
                     </span>
 
                     {test.fastingNote ? (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">
-                        <span>⚠️ Fasting</span>
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsFastingGuideOpen(true);
+                          const el = document.getElementById("fasting-guide");
+                          if (el) el.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 px-2 py-0.5 rounded transition-colors cursor-pointer"
+                        title="Click to view Fasting Guide rules"
+                      >
+                        <span>⚠️ Fasting Note</span>
+                      </button>
                     ) : null}
 
                     {test.popular && (

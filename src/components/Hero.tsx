@@ -160,6 +160,25 @@ export default function Hero() {
               </div>
             </div>
 
+            {/* Quick Doctor's Prescription WhatsApp Callout */}
+            <div className="flex items-center gap-2 text-xs text-slate-700 bg-white/95 border border-teal/30 px-3.5 py-2.5 rounded-2xl shadow-2xs w-full min-w-0">
+              <span className="text-base shrink-0">📸</span>
+              <span className="truncate font-medium">
+                Have a doctor&apos;s prescription slip? Snap photo &amp; send:
+              </span>
+              <a
+                href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
+                  "Hello SV Care Health Diagnostics, I am sharing a photo of my doctor's prescription slip. Please verify the prescribed tests, calculate the discounted total, and schedule doorstep collection."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-teal-dark hover:text-teal hover:underline ml-auto shrink-0 inline-flex items-center gap-1"
+              >
+                <span>WhatsApp Quote</span>
+                <span>↗</span>
+              </a>
+            </div>
+
             {/* Diagnostic Trust Metrics Pillars */}
             <div className="pt-5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full min-w-0">
               <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
