@@ -527,7 +527,7 @@ export const ACCREDITATION = {
   companyNumber: "15665772",
   verificationUrl: "https://www.eucert.co.uk",
   verificationEmail: "info@eucert.co.uk",
-  imagePath: "/iso-certificate.jpg",
+  imagePath: "/iso-certificate-v2.jpg",
   pdfPath: "/iso-certificate.pdf",
   registeredEntity: "S V CARE HEALTH DIAGNOSTICS",
   registeredAddress:

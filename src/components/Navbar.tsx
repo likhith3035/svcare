@@ -86,10 +86,10 @@ export default function Navbar() {
                 </div>
               )}
 
-              {/* Direct Call Button */}
+              {/* Direct Call Button (Desktop/Tablet only; Mobile uses persistent bottom bar) */}
               <a
                 href={CONTACT.dialLinks[0]}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold
+                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold
                   text-white bg-red hover:bg-red-hover rounded-xl shadow-sm transition-all
                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red
                   active:scale-[0.98]"

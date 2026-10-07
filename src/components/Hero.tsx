@@ -47,24 +47,17 @@ export default function Hero() {
           {/* ─── Left Column: Headline & Action CTAs ─── */}
           <div className="lg:col-span-7 space-y-5 sm:space-y-6 max-w-2xl">
             {/* Live Operational Status & Free Collection Announcement */}
-            <div className="flex flex-wrap items-center gap-2">
-              {isOpen !== null && (
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/90 border border-slate-200 shadow-xs text-slate-700">
-                  <span
-                    className={`h-2 w-2 rounded-full ${
-                      isOpen ? "bg-emerald-500 animate-pulse" : "bg-red"
-                    }`}
-                    aria-hidden="true"
-                  />
-                  <span>{isOpen ? "Open Now • 6 AM to 8 PM" : "Closed • Opens 6:00 AM"}</span>
-                </div>
-              )}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal/10 border border-teal/20 text-teal-dark">
-                <svg className="w-3.5 h-3.5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Free Doorstep Collection in Srikalahasti</span>
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-white/95 border border-slate-200 shadow-2xs text-slate-700">
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    isOpen ? "bg-emerald-500 animate-pulse" : "bg-red"
+                  }`}
+                  aria-hidden="true"
+                />
+                <span>{isOpen ? "Open Now • 6 AM – 8 PM" : "Closed • Opens 6 AM"} • Free Pickup</span>
               </div>
+
               <button
                 type="button"
                 onClick={() => {
@@ -72,7 +65,7 @@ export default function Hero() {
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                   window.dispatchEvent(new CustomEvent("open-certificate-modal"));
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-navy hover:bg-navy-light text-white border border-teal/30 shadow-2xs transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-navy hover:bg-navy-light text-white border border-teal/30 shadow-2xs transition-colors cursor-pointer"
                 title="View ISO 9001:2015 Official Certificate"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
@@ -94,7 +87,8 @@ export default function Hero() {
             </p>
 
             {/* Action Buttons: Responsive Stack on Mobile */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1">
+            <div className="space-y-2 sm:space-y-0 sm:flex sm:items-center sm:gap-3 pt-1">
+              {/* Primary High-Converting CTA */}
               <a
                 href="#booking"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-bold text-white
@@ -105,15 +99,34 @@ export default function Hero() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                Book Home Collection (₹0 Fee)
+                <span>Book Home Collection (₹0 Fee)</span>
               </a>
 
-              <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-3">
+              {/* Mobile Exploration Shortcuts (Replaces duplicate call/WhatsApp buttons since sticky bottom bar already has them) */}
+              <div className="grid grid-cols-2 gap-2 w-full sm:hidden">
+                <a
+                  href="#packages"
+                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold text-navy bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors"
+                >
+                  <span>Packages (₹400)</span>
+                  <span className="text-teal font-black">↓</span>
+                </a>
+                <a
+                  href="#tests"
+                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold text-navy bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors"
+                >
+                  <span>100 Tests (₹50)</span>
+                  <span className="text-teal font-black">↓</span>
+                </a>
+              </div>
+
+              {/* Desktop/Tablet Direct WhatsApp & Phone CTAs */}
+              <div className="hidden sm:flex sm:items-center sm:gap-3">
                 <a
                   href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hello SV Care Health Diagnostics, I would like to book a blood test appointment.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-3.5 text-xs sm:text-base font-bold text-white
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm sm:text-base font-bold text-white
                     bg-[#1E9C80] hover:bg-[#16856C] rounded-xl shadow-md shadow-teal/20 transition-all
                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal
                     active:scale-[0.98] cursor-pointer"
@@ -127,10 +140,10 @@ export default function Hero() {
 
                 <a
                   href={CONTACT.dialLinks[0]}
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-bold text-slate-700
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3.5 text-sm font-bold text-slate-700
                     bg-white hover:bg-slate-50 border border-slate-200 rounded-xl shadow-xs transition-all"
                 >
-                  <svg className="w-3.5 h-3.5 text-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-4 h-4 text-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   <span>{CONTACT.phonesFormatted[0]}</span>

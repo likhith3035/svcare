@@ -199,7 +199,7 @@ export default function Tests() {
                   key={cat.value}
                   type="button"
                   onClick={() => setSelectedCategory(cat.value)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                     isActive
                       ? "bg-navy text-white shadow-xs"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-navy"

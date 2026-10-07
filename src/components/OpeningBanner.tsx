@@ -30,15 +30,24 @@ export default function OpeningBanner() {
         aria-label="Grand Opening Offer Announcement"
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between gap-2 text-xs sm:text-sm">
-          {/* Mobile view (< sm) */}
-          <div className="flex sm:hidden items-center gap-1.5 min-w-0 flex-1">
-            <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-white/20 text-white font-extrabold text-[10px] uppercase tracking-wider shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-yellow-300 animate-ping mr-1" />
-              Offer
+          {/* Mobile view (< sm): One-tap clean notification banner */}
+          <div
+            onClick={() => setIsOfferModalOpen(true)}
+            className="flex sm:hidden items-center justify-between gap-1.5 min-w-0 flex-1 cursor-pointer"
+          >
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-white/20 text-white font-extrabold text-[10px] uppercase tracking-wider shrink-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-300 animate-ping mr-1" />
+                Special
+              </span>
+              <p className="text-[11px] font-bold text-white truncate">
+                <strong className="underline decoration-yellow-300">FREE Sugar Test</strong> & Body Checkup
+              </p>
+            </div>
+            <span className="text-[10px] font-bold bg-white/20 px-2 py-0.5 rounded-md text-white shrink-0 border border-white/20 flex items-center gap-0.5">
+              <span>View</span>
+              <span>↗</span>
             </span>
-            <p className="text-[11px] font-bold text-white truncate">
-              <strong className="underline decoration-yellow-300">FREE Sugar Test</strong> + 1st 10 Free Checkups!
-            </p>
           </div>
 
           {/* Desktop view (sm+) */}
@@ -60,8 +69,8 @@ export default function OpeningBanner() {
             </span>
           </div>
 
-          {/* Action CTAs */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Desktop Action CTAs (sm+) */}
+          <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* View Offer Details Button */}
             <button
               type="button"
