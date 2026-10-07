@@ -45,7 +45,7 @@ export default function Footer() {
                 { label: "Book a Test", href: "#booking" },
                 { label: "Lab Location", href: "#contact" },
               ].map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <a href={link.href} className="text-slate-400 hover:text-teal transition-colors">
                     {link.label}
                   </a>
