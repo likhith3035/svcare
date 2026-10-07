@@ -185,8 +185,8 @@ export default function Tests() {
             </div>
           </div>
 
-          {/* Category Chips Horizontal Bar */}
-          <div className="flex flex-wrap gap-1.5 pt-1">
+          {/* Category Chips Horizontal Bar with mobile swipe */}
+          <div className="flex overflow-x-auto sm:flex-wrap gap-1.5 pt-1 pb-1 sm:pb-0 no-scrollbar -mx-1 px-1">
             {CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat.value;
               const count =

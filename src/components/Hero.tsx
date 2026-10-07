@@ -81,23 +81,23 @@ export default function Hero() {
             </div>
 
             {/* Main High-Impact Headline */}
-            <h1 className="font-heading text-3xl sm:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-navy leading-[1.15]">
+            <h1 className="font-heading text-2xl sm:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-navy leading-[1.2] sm:leading-[1.15]">
               Accurate blood diagnostics,
               <br />
               <span className="text-teal font-normal italic">right at your doorstep.</span>
             </h1>
 
             {/* Subtext */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            <p className="text-sm sm:text-lg text-slate-600 leading-relaxed font-normal">
               Official health packages starting from <strong className="text-navy font-bold">₹400</strong> • 100+ tests from <strong className="text-navy font-bold">₹50</strong>.
               Trained phlebotomists collect sterile samples at your home or clinic with same-day WhatsApp reports.
             </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            {/* Action Buttons: Responsive Stack on Mobile */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1">
               <a
                 href="#booking"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-bold text-white
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-bold text-white
                   bg-red hover:bg-red-hover rounded-xl shadow-md shadow-red/20 transition-all
                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red
                   active:scale-[0.98] cursor-pointer"
@@ -105,39 +105,41 @@ export default function Hero() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                Book Home Collection
+                Book Home Collection (₹0 Fee)
               </a>
 
-              <a
-                href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hello SV Care Health Diagnostics, I would like to book a blood test appointment.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-bold text-white
-                  bg-[#1E9C80] hover:bg-[#16856C] rounded-xl shadow-md shadow-teal/20 transition-all
-                  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal
-                  active:scale-[0.98] cursor-pointer"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.69 0-3.259-.52-4.555-1.408l-.327-.194-2.871.852.852-2.871-.194-.327A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
-                </svg>
-                WhatsApp
-              </a>
+              <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-3">
+                <a
+                  href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hello SV Care Health Diagnostics, I would like to book a blood test appointment.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-3.5 text-xs sm:text-base font-bold text-white
+                    bg-[#1E9C80] hover:bg-[#16856C] rounded-xl shadow-md shadow-teal/20 transition-all
+                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal
+                    active:scale-[0.98] cursor-pointer"
+                >
+                  <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.69 0-3.259-.52-4.555-1.408l-.327-.194-2.871.852.852-2.871-.194-.327A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+                  </svg>
+                  <span>WhatsApp</span>
+                </a>
 
-              <a
-                href={CONTACT.dialLinks[0]}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-3.5 text-sm font-bold text-slate-700
-                  bg-white hover:bg-slate-50 border border-slate-200 rounded-xl shadow-xs transition-all"
-              >
-                <svg className="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                {CONTACT.phonesFormatted[0]}
-              </a>
+                <a
+                  href={CONTACT.dialLinks[0]}
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-bold text-slate-700
+                    bg-white hover:bg-slate-50 border border-slate-200 rounded-xl shadow-xs transition-all"
+                >
+                  <svg className="w-3.5 h-3.5 text-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span>{CONTACT.phonesFormatted[0]}</span>
+                </a>
+              </div>
             </div>
 
             {/* Diagnostic Trust Metrics Pillars */}
-            <div className="pt-5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            <div className="pt-5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
               <div className="p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs">
                 <span className="block text-xl font-extrabold text-teal font-mono">₹0</span>
                 <span className="text-xs text-slate-600 font-semibold">Home Sample Pickup</span>

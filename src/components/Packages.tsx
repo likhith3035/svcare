@@ -64,8 +64,8 @@ export default function Packages() {
         </div>
 
         {/* ─── Grand Opening Inaugural Special Callout ─── */}
-        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red/10 via-amber-500/10 to-teal/10 border border-red-200/80 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className="mb-8 p-3.5 sm:p-5 rounded-2xl bg-gradient-to-r from-red/10 via-amber-500/10 to-teal/10 border border-red-200/80 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5 sm:gap-4">
+          <div className="flex items-start sm:items-center gap-3">
             <span className="w-10 h-10 rounded-xl bg-red text-white flex items-center justify-center font-black text-lg shrink-0 shadow-xs">
               🎁
             </span>
@@ -76,24 +76,24 @@ export default function Packages() {
                 </span>
                 <span className="text-xs text-slate-500 font-semibold">Limited Period</span>
               </div>
-              <p className="text-sm font-bold text-navy mt-0.5">
+              <p className="text-xs sm:text-sm font-bold text-navy mt-0.5">
                 FREE Sugar Test (Fasting / Random) • 1st 10 Members Get FREE Body Checkup
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 shrink-0">
             <button
               type="button"
               onClick={() => handleBook("offer-sugar")}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-red text-white hover:bg-red-hover transition-colors shadow-xs cursor-pointer"
+              className="px-3 py-2 sm:px-3.5 rounded-xl text-[11px] sm:text-xs font-bold bg-red text-white hover:bg-red-hover transition-colors shadow-xs cursor-pointer text-center"
             >
               Claim Free Sugar Test
             </button>
             <button
               type="button"
               onClick={() => handleBook("offer-checkup")}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-navy text-white hover:bg-navy-light transition-colors shadow-xs cursor-pointer"
+              className="px-3 py-2 sm:px-3.5 rounded-xl text-[11px] sm:text-xs font-bold bg-navy text-white hover:bg-navy-light transition-colors shadow-xs cursor-pointer text-center"
             >
               1st 10 Free Checkup
             </button>

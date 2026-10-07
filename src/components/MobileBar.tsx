@@ -5,9 +5,10 @@ import { CONTACT, SITE } from "@/data/site";
 export default function MobileBar() {
   return (
     <aside
-      className="fixed bottom-0 left-0 right-0 z-50 sm:hidden
+      className="fixed bottom-0 left-0 right-0 z-40 sm:hidden
         bg-white/95 dark:bg-deep-navy/95 backdrop-blur-lg
-        border-t border-slate-200 dark:border-slate-800 shadow-2xl"
+        border-t border-slate-200 dark:border-slate-800 shadow-2xl
+        pb-[env(safe-area-inset-bottom,0px)]"
       aria-label="Mobile quick actions"
     >
       <div className="grid grid-cols-2 gap-2.5 p-3 max-w-md mx-auto">
