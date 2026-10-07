@@ -40,6 +40,7 @@ export default function Footer() {
                 { label: "Packages", href: "#packages" },
                 { label: "100 Tests (Price List)", href: "#tests" },
                 { label: "Home Collection", href: "#home-collection" },
+                { label: "Sample Lab Report", href: "#home-collection" },
                 { label: "ISO 9001:2015 Certificate", href: "#accreditation" },
                 { label: "Book a Test", href: "#booking" },
                 { label: "Lab Location", href: "#contact" },

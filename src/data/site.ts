@@ -579,3 +579,50 @@ export const HERO_LAB_REPORT = {
 
 export const COLLECTION_PLACES = ["Home", "Work", "Clinic"] as const;
 export type CollectionPlace = (typeof COLLECTION_PLACES)[number];
+
+// ─── Official Sample Diagnostic Report Preview ───
+export const SAMPLE_REPORT = {
+  title: "Official WhatsApp Diagnostic Report",
+  subtitle: "Delivered within 4–6 Hours of Sample Pickup",
+  patientName: "Mr. Ramesh Babu",
+  ageGender: "48 Yrs / Male",
+  uhid: "SVC-2026-0842",
+  sampleBarcode: "#B-48192",
+  collectionType: "Doorstep Home Pickup (₹0 Fee)",
+  collectionTime: "06:30 AM",
+  reportedTime: "10:45 AM (Same-Day)",
+  turnaroundTime: "4–6 Hours via WhatsApp PDF",
+  imagePath: "/sample-report.jpg",
+  pdfPath: "/sample-report.pdf",
+  letterheadBg: "/letterhead-bg.jpg",
+  letterheadPdf: "/letterhead.pdf",
+  highlights: [
+    {
+      title: "100% Doctor Accepted",
+      desc: "Signed by MD Clinical Pathologist and accepted across all hospitals & clinics.",
+      icon: "doctor",
+    },
+    {
+      title: "Tamper-Proof QR Code",
+      desc: "Instant digital QR scan authenticates lab parameters against central records.",
+      icon: "qr",
+    },
+    {
+      title: "Password-Protected PDF",
+      desc: "Delivered safely to your registered WhatsApp with date-of-birth encryption.",
+      icon: "lock",
+    },
+    {
+      title: "ISO 9001:2015 Verified",
+      desc: "Processed in accordance with international QMS diagnostic quality guidelines.",
+      icon: "shield",
+    },
+  ],
+  testParameters: [
+    { name: "Complete Blood Count (CBC)", value: "14.6 Hb", unit: "g/dL", status: "Normal" },
+    { name: "Fasting Blood Sugar (FBS)", value: "92", unit: "mg/dL", status: "Normal" },
+    { name: "HbA1c (3-Month Sugar)", value: "5.4", unit: "%", status: "Normal" },
+    { name: "Serum Creatinine", value: "0.94", unit: "mg/dL", status: "Normal" },
+    { name: "Total Cholesterol", value: "168", unit: "mg/dL", status: "Normal" },
+  ],
+} as const;

@@ -83,7 +83,16 @@ export default function Hero() {
             {/* Subtext */}
             <p className="text-sm sm:text-lg text-slate-600 leading-relaxed font-normal">
               Official health packages starting from <strong className="text-navy font-bold">₹400</strong> • 100+ tests from <strong className="text-navy font-bold">₹50</strong>.
-              Trained phlebotomists collect sterile samples at your home or clinic with same-day WhatsApp reports.
+              Trained phlebotomists collect sterile samples at your home or clinic with{" "}
+              <a
+                href="#home-collection"
+                className="text-teal hover:text-teal-dark hover:underline font-bold inline-flex items-center gap-0.5"
+                title="View authentic WhatsApp sample report preview"
+              >
+                <span>same-day WhatsApp reports</span>
+                <span className="text-xs font-bold">↗</span>
+              </a>
+              .
             </p>
 
             {/* Action Buttons: Responsive Stack on Mobile */}
