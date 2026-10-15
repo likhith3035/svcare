@@ -14,6 +14,12 @@ export const TELUGU_CONTENT = {
     freeHomePickupPill: "ఇంటి వద్దే శాంపిల్ పికప్",
     testsCountPill: "ల్యాబ్ పరీక్షలు",
     earlyMorningPill: "ఉదయాన్నే కలెక్షన్",
+    quickResponseTitle: "తక్షణ స్పందన",
+    quickResponseDesc: "5 నిమిషాల్లో వాట్సాప్ రిప్లై",
+    reliableTitle: "ఖచ్చితమైన & విశ్వసనీయ",
+    reliableDesc: "ISO 9001:2015 సర్టిఫైడ్ ల్యాబ్",
+    patientFirstTitle: "రోగి సంరక్షణే ప్రథమం",
+    patientFirstDesc: "సున్నితమైన రక్తసేకరణ • ₹0 పికప్",
   },
 
   prescriptionBanner: {

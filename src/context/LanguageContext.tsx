@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 
-type SectionId = "hero" | "prescription" | "fasting" | "homeCollection" | "booking";
+type SectionId = "hero" | "prescription" | "fasting" | "homeCollection" | "booking" | "faq";
 
 interface LanguageContextType {
   /** True if global default is Telugu */

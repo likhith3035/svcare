@@ -4,6 +4,7 @@ import Packages from "@/components/Packages";
 import Tests from "@/components/Tests";
 import HomeCollection from "@/components/HomeCollection";
 import Booking from "@/components/Booking";
+import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Accreditation from "@/components/Accreditation";
 import {
@@ -24,6 +25,7 @@ export default function Home() {
         <HomeCollection />
         <Accreditation />
         <Booking />
+        <Faq />
         <Contact />
 
         {/* 

@@ -4,10 +4,10 @@ export const SITE = {
   name: "SV Care Health Diagnostics",
   tagline: "Accurate • Reliable • Trusted",
   motto: "Your Health Our Priority...",
-  title: "SV Care Health Diagnostics | 100+ Tests & Health Packages in Srikalahasti",
+  title: "SV Care Health Diagnostics | #1 Diagnostic Centre in SKHT (Srikalahasti)",
   description:
-    "SV Care Health Diagnostics is an ISO 9001:2015 certified diagnostic laboratory in Srikalahasti offering 100+ blood tests, health packages from ₹400, and free home sample collection. Open daily 6:00 AM to 8:00 PM.",
-  url: "https://svcarediagnostics.in", // ⚠️ UPDATE THIS when the real domain is live — affects sitemap, robots.txt, and JSON-LD schema
+    "SV Care Health Diagnostics is the #1 ISO 9001:2015 certified diagnostic centre in SKHT (Srikalahasti) near Babu Agraharam & Kothapet. 100+ blood tests from ₹50, sugar tests, packages from ₹400 & free home collection. Open daily 6:00 AM – 8:00 PM.",
+  url: "https://svcarehealthdiagnostics.vercel.app",
   whatsapp: "918019081501",
   whatsappLink: "https://wa.me/918019081501",
   instagram: "https://instagram.com/svcarehealth?stkn=dW53aXh0em5taGt3",

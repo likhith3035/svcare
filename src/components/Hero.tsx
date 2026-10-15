@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useOpenStatus } from "@/hooks/useOpenStatus";
 import { OFFICIAL_PACKAGES, CONTACT, SITE } from "@/data/site";
@@ -12,6 +14,7 @@ export default function Hero() {
   const skip = !!prefersReducedMotion;
   const { isTelugu } = useLanguage();
   const teluguHero = isTelugu("hero");
+  const [activeTab, setActiveTab] = useState<"reception" | "packages">("reception");
 
   function selectAndBook(pkgId: string) {
     const el = document.getElementById("booking");
@@ -43,13 +46,14 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Luminous glow */}
-      <div className="absolute top-1/4 right-5 w-[450px] h-[450px] bg-teal/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Luminous ambient glow behind right showcase */}
+      <div className="absolute top-1/4 right-5 w-[500px] h-[500px] bg-teal/15 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 w-full min-w-0">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full min-w-0">
-          {/* ─── Left Column: Headline & Action CTAs ─── */}
-          <div className="lg:col-span-7 space-y-4 sm:space-y-6 max-w-2xl w-full min-w-0">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full min-w-0">
+          
+          {/* ─── Left Column: Headline, 3 Trust Badges & CTAs ─── */}
+          <div className="lg:col-span-7 space-y-4 sm:space-y-5 max-w-2xl w-full min-w-0">
             {/* Live Operational Status, ISO Certification & Telugu Language Toggle */}
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-white/95 border border-slate-200 shadow-2xs text-slate-700 max-w-full">
@@ -83,7 +87,7 @@ export default function Hero() {
             </div>
 
             {/* Main High-Impact Headline */}
-            <h1 className="font-heading text-2xl sm:text-4xl lg:text-[3.25rem] font-bold tracking-tight text-navy leading-[1.2] sm:leading-[1.15] break-words">
+            <h1 className="font-heading text-2xl sm:text-4xl lg:text-[3.15rem] font-bold tracking-tight text-navy leading-[1.2] sm:leading-[1.15] break-words">
               {teluguHero ? (
                 <>
                   {TELUGU_CONTENT.hero.headlinePart1}
@@ -102,7 +106,7 @@ export default function Hero() {
             </h1>
 
             {/* Subtext */}
-            <p className="text-sm sm:text-lg text-slate-600 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
               {teluguHero ? (
                 <>
                   అధికారిక హెల్త్ ప్యాకేజీలు <strong className="text-navy font-bold">₹400</strong> నుంచే • 100+ ల్యాబ్ టెస్టులు <strong className="text-navy font-bold">₹50</strong> నుంచే.
@@ -134,12 +138,60 @@ export default function Hero() {
               )}
             </p>
 
+            {/* ─── Client Inspired: 3 Key Feature Trust Badges ─── */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1">
+              {/* Badge 1: Quick Response */}
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-teal/50 hover:shadow-xs transition-all flex flex-col items-center sm:items-start text-center sm:text-left min-w-0">
+                <div className="w-8 h-8 rounded-xl bg-teal/10 text-teal flex items-center justify-center mb-1.5 shrink-0">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-navy leading-tight truncate w-full">
+                  {teluguHero ? TELUGU_CONTENT.hero.quickResponseTitle : "Quick Response"}
+                </span>
+                <span className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-tight hidden xs:block truncate w-full">
+                  {teluguHero ? TELUGU_CONTENT.hero.quickResponseDesc : "< 5 Min WhatsApp Reply"}
+                </span>
+              </div>
+
+              {/* Badge 2: Reliable & Accurate */}
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-emerald-300 hover:shadow-xs transition-all flex flex-col items-center sm:items-start text-center sm:text-left min-w-0">
+                <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-1.5 shrink-0">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-navy leading-tight truncate w-full">
+                  {teluguHero ? TELUGU_CONTENT.hero.reliableTitle : "Reliable & Accurate"}
+                </span>
+                <span className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-tight hidden xs:block truncate w-full">
+                  {teluguHero ? TELUGU_CONTENT.hero.reliableDesc : "ISO 9001:2015 Certified"}
+                </span>
+              </div>
+
+              {/* Badge 3: Patient First Approach */}
+              <div className="p-2.5 sm:p-3 rounded-2xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-rose-300 hover:shadow-xs transition-all flex flex-col items-center sm:items-start text-center sm:text-left min-w-0">
+                <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-1.5 shrink-0">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-navy leading-tight truncate w-full">
+                  {teluguHero ? TELUGU_CONTENT.hero.patientFirstTitle : "Patient-First Care"}
+                </span>
+                <span className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-tight hidden xs:block truncate w-full">
+                  {teluguHero ? TELUGU_CONTENT.hero.patientFirstDesc : "Gentle Phlebotomy • ₹0 Draw"}
+                </span>
+              </div>
+            </div>
+
             {/* Action Buttons: Responsive Stack on Mobile */}
             <div className="space-y-2 sm:space-y-0 sm:flex sm:items-center sm:gap-3 pt-1 w-full min-w-0">
               {/* Primary High-Converting CTA */}
               <a
                 href="#booking"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 text-sm sm:text-base font-bold text-white
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm sm:text-base font-bold text-white
                   bg-red hover:bg-red-hover rounded-xl shadow-md shadow-red/20 transition-all
                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red
                   active:scale-[0.98] cursor-pointer"
@@ -150,7 +202,7 @@ export default function Hero() {
                 <span className="truncate">Book Home Collection (₹0 Fee)</span>
               </a>
 
-              {/* Mobile Exploration Shortcuts (Replaces duplicate call/WhatsApp buttons since sticky bottom bar already has them) */}
+              {/* Mobile Exploration Shortcuts */}
               <div className="grid grid-cols-2 gap-2 w-full sm:hidden">
                 <a
                   href="#packages"
@@ -221,7 +273,7 @@ export default function Hero() {
             </div>
 
             {/* Diagnostic Trust Metrics Pillars */}
-            <div className="pt-5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full min-w-0">
+            <div className="pt-3 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full min-w-0">
               <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-2xs min-w-0 overflow-hidden">
                 <span className="block text-lg sm:text-xl font-extrabold text-teal font-mono">₹0</span>
                 <span className="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block truncate">
@@ -251,102 +303,200 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ─── Right Column: Interactive Diagnostic Quick-Selector ─── */}
+          {/* ─── Right Column: Signature Sweeping Curved Reception Showcase & Packages Toggle ─── */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end w-full min-w-0">
             <motion.div
-              className="w-full max-w-full sm:max-w-[440px] bg-white rounded-2xl shadow-clinical border border-slate-200/90 overflow-hidden min-w-0"
+              className="w-full max-w-full sm:max-w-[480px] bg-white rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden min-w-0 flex flex-col"
               initial={skip ? {} : { opacity: 0, y: 25 }}
               animate={skip ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              {/* Card Header */}
-              <div className="bg-navy text-white px-3.5 py-3 sm:px-5 sm:py-4 border-b border-navy-light flex items-center justify-between gap-2 min-w-0">
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="w-2 h-2 rounded-full bg-teal animate-pulse shrink-0" />
-                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-teal-light truncate">
-                      Popular Health Packages
-                    </span>
-                  </div>
-                  <h2 className="text-sm sm:text-base font-bold text-white mt-0.5 truncate">
-                    Preventive Health Screenings
-                  </h2>
+              {/* Header Tab Switcher: Reception Desk vs Popular Packages */}
+              <div className="bg-navy p-2 flex items-center justify-between gap-1 border-b border-navy-light shrink-0">
+                <div className="flex items-center gap-1 w-full">
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("reception")}
+                    className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                      activeTab === "reception"
+                        ? "bg-teal text-white shadow-xs"
+                        : "text-slate-300 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    <span>🏥</span>
+                    <span className="truncate">Clinic Reception</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("packages")}
+                    className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                      activeTab === "packages"
+                        ? "bg-teal text-white shadow-xs"
+                        : "text-slate-300 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    <span>🧪</span>
+                    <span className="truncate">Popular Packages</span>
+                    <span className="text-[9px] bg-white/20 px-1.5 py-0.2 rounded font-mono hidden sm:inline">₹400</span>
+                  </button>
                 </div>
-                <span className="text-[10px] font-mono font-bold bg-white/10 px-2 sm:px-2.5 py-1 rounded-md text-slate-200 shrink-0">
-                  From ₹400
-                </span>
               </div>
 
-              {/* 3 Interactive Quick Package Rows */}
-              <div className="p-3 sm:p-5 space-y-2.5 sm:space-y-3 min-w-0">
-                {featuredPackages.map((pkg) => {
-                  const discount = pkg.originalPrice
-                    ? Math.round(((pkg.originalPrice - pkg.price) / pkg.originalPrice) * 100)
-                    : null;
+              {/* View 1: Photorealistic Clinic Reception with Signature Curved Frame & Floating Badges */}
+              {activeTab === "reception" && (
+                <div className="relative group overflow-hidden bg-slate-900 flex-1 flex flex-col">
+                  {/* Aspect Ratio Container for Reception Asset */}
+                  <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full overflow-hidden">
+                    <Image
+                      src="/reception-desk.jpg"
+                      alt="SV Care Health Diagnostics clinic reception desk in Srikalahasti with 3D illuminated wall logo and WE CARE patient values board"
+                      fill
+                      priority
+                      className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                      sizes="(max-width: 1024px) 100vw, 480px"
+                    />
 
-                  return (
-                    <div
-                      key={pkg.id}
-                      onClick={() => selectAndBook(pkg.id)}
-                      className={`group p-2.5 sm:p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 sm:gap-3 min-w-0 ${
-                        pkg.isPopular
-                          ? "bg-teal-light/40 border-teal hover:border-teal-dark hover:bg-teal-light/60 shadow-xs"
-                          : "bg-slate-50/70 border-slate-200 hover:border-slate-300 hover:bg-slate-100/70"
-                      }`}
-                    >
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-                          <span className="font-bold text-xs sm:text-sm text-navy truncate">
-                            {pkg.name}
-                          </span>
-                          {pkg.isPopular && (
-                            <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-teal text-white px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
-                              Popular
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-[11px] sm:text-xs text-slate-500 mt-0.5 truncate">
-                          {pkg.inclusions}
-                        </div>
+                    {/* Sweeping organic wave overlay at top-left matching client's mockup */}
+                    <div 
+                      className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay"
+                      style={{
+                        backgroundImage: `radial-gradient(circle at 10% 10%, #1E9C80 0%, transparent 60%)`
+                      }}
+                      aria-hidden="true"
+                    />
+
+                    {/* Top Floating Pill: Location & Live Hours */}
+                    <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 pointer-events-none">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-white/95 text-navy backdrop-blur-md shadow-md border border-white/80 pointer-events-auto">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="truncate">PNR Convention Hall • Srikalahasti</span>
                       </div>
+                      <span className="text-[10px] font-bold text-white bg-navy/90 backdrop-blur-md px-2.5 py-1 rounded-full shadow-md shrink-0">
+                        6 AM – 8 PM
+                      </span>
+                    </div>
 
-                      <div className="text-right shrink-0">
-                        <div className="flex items-baseline gap-1 sm:gap-1.5 justify-end">
-                          {pkg.originalPrice && (
-                            <span className="text-[11px] sm:text-xs line-through text-slate-400 font-mono">
-                              ₹{pkg.originalPrice}
-                            </span>
-                          )}
-                          <span className="text-base sm:text-lg font-black text-navy font-mono tabular-nums">
-                            ₹{pkg.price}
+                    {/* Center Subtle Pill: WE CARE Core Pillars */}
+                    <div className="absolute bottom-3 inset-x-3 pointer-events-none">
+                      <div className="p-3 sm:p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-white/80 shadow-lg pointer-events-auto flex items-center justify-between gap-2">
+                        <div className="min-w-0">
+                          <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-teal bg-teal/10 px-2 py-0.5 rounded-full">
+                            Our Care Philosophy
                           </span>
+                          <p className="text-xs sm:text-sm font-bold text-navy mt-1 truncate">
+                            Your Health • Your Family • Your Trust
+                          </p>
                         </div>
-                        {discount && (
-                          <span className="text-[9px] sm:text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-1.5 py-0.5 rounded inline-block">
-                            {discount}% OFF
-                          </span>
-                        )}
+                        <a
+                          href="#packages"
+                          className="shrink-0 inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-white bg-navy hover:bg-navy-light transition-all shadow-xs"
+                          title="Explore tests and packages"
+                        >
+                          <span>Tests (₹50)</span>
+                          <span className="text-teal-light font-black">↓</span>
+                        </a>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
 
-                {/* Direct Action */}
-                <div className="pt-1 sm:pt-2">
-                  <a
-                    href="#packages"
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-bold text-navy bg-slate-100 hover:bg-slate-200/80 transition-colors"
-                  >
-                    <span>View All 7 Packages & 100 Tests</span>
-                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </a>
+                  {/* Bottom Strip: Walk-in & Safety Guarantees */}
+                  <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-200/90 flex items-center justify-between text-xs text-slate-600">
+                    <span className="flex items-center gap-1.5 font-semibold text-slate-700">
+                      <svg className="w-3.5 h-3.5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      Walk-ins & Home Visits
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab("packages")}
+                      className="text-teal font-bold hover:underline cursor-pointer"
+                    >
+                      View Price List ↗
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Bottom Assurance */}
-              <div className="px-3.5 py-2.5 sm:px-5 sm:py-3 bg-slate-50 border-t border-slate-100 flex flex-wrap items-center justify-between gap-1.5 text-xs text-slate-500 min-w-0">
+              {/* View 2: Interactive Popular Health Packages Selector */}
+              {activeTab === "packages" && (
+                <div className="p-3 sm:p-4 space-y-2.5 flex-1 flex flex-col justify-between">
+                  <div className="space-y-2.5">
+                    {featuredPackages.map((pkg) => {
+                      const discount = pkg.originalPrice
+                        ? Math.round(((pkg.originalPrice - pkg.price) / pkg.originalPrice) * 100)
+                        : null;
+
+                      return (
+                        <div
+                          key={pkg.id}
+                          onClick={() => selectAndBook(pkg.id)}
+                          className={`group p-2.5 sm:p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 sm:gap-3 min-w-0 ${
+                            pkg.isPopular
+                              ? "bg-teal-light/40 border-teal hover:border-teal-dark hover:bg-teal-light/60 shadow-xs"
+                              : "bg-slate-50/70 border-slate-200 hover:border-slate-300 hover:bg-slate-100/70"
+                          }`}
+                        >
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                              <span className="font-bold text-xs sm:text-sm text-navy truncate">
+                                {pkg.name}
+                              </span>
+                              {pkg.isPopular && (
+                                <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-teal text-white px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
+                                  Popular
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-[11px] sm:text-xs text-slate-500 mt-0.5 truncate">
+                              {pkg.inclusions}
+                            </div>
+                          </div>
+
+                          <div className="text-right shrink-0">
+                            <div className="flex items-baseline gap-1 sm:gap-1.5 justify-end">
+                              {pkg.originalPrice && (
+                                <span className="text-[11px] sm:text-xs line-through text-slate-400 font-mono">
+                                  ₹{pkg.originalPrice}
+                                </span>
+                              )}
+                              <span className="text-base sm:text-lg font-black text-navy font-mono tabular-nums">
+                                ₹{pkg.price}
+                              </span>
+                            </div>
+                            {discount && (
+                              <span className="text-[9px] sm:text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-1.5 py-0.5 rounded inline-block">
+                                {discount}% OFF
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Direct Action Link */}
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <a
+                      href="#packages"
+                      className="flex-1 inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-navy bg-slate-100 hover:bg-slate-200/80 transition-colors"
+                    >
+                      <span>View All 7 Packages</span>
+                      <span>↓</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab("reception")}
+                      className="py-2 px-3 rounded-xl text-xs font-bold text-teal hover:bg-teal/10 transition-colors cursor-pointer"
+                    >
+                      Back to Reception ↗
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Bottom Card Guarantee Footer */}
+              <div className="px-3.5 py-2 sm:px-4 sm:py-2.5 bg-slate-50 border-t border-slate-100 flex flex-wrap items-center justify-between gap-1 text-[11px] text-slate-500 shrink-0">
                 <button
                   type="button"
                   onClick={() => {
@@ -354,15 +504,15 @@ export default function Hero() {
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                     window.dispatchEvent(new CustomEvent("open-certificate-modal"));
                   }}
-                  className="flex items-center gap-1.5 font-bold text-navy hover:text-teal transition-colors cursor-pointer text-[11px] sm:text-xs min-w-0"
+                  className="flex items-center gap-1 font-bold text-navy hover:text-teal transition-colors cursor-pointer"
                   title="Click to view ISO 9001:2015 certificate"
                 >
-                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <svg className="w-3.5 h-3.5 text-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="truncate">ISO 9001:2015 Certified Lab ↗</span>
+                  <span>ISO 9001:2015 Registered Lab ↗</span>
                 </button>
-                <span className="font-semibold text-slate-600 text-[11px] sm:text-xs shrink-0">6:00 AM – 8:00 PM</span>
+                <span className="font-semibold text-slate-600">Daily 6 AM – 8 PM</span>
               </div>
             </motion.div>
           </div>
