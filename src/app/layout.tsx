@@ -49,8 +49,11 @@ export const metadata: Metadata = {
     "sv care diagnostics",
     "pnr convention hall lab srikalahasti"
   ],
-  authors: [{ name: "SV Care Health Diagnostics", url: SITE.url }],
-  creator: "SV Care Health Diagnostics",
+  authors: [
+    { name: "SV Care Health Diagnostics", url: SITE.url },
+    { name: "Likhith", url: "https://devlikhith.vercel.app/" }
+  ],
+  creator: "Likhith (https://devlikhith.vercel.app/)",
   publisher: "SV Care Health Diagnostics",
   category: "Medical & Health Diagnostics",
   icons: {

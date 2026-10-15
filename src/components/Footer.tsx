@@ -102,10 +102,34 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright row */}
-        <div className="mt-14 pt-8 border-t border-slate-800 text-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 font-medium">
-          <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p className="flex items-center gap-2">
+        {/* Bottom copyright row & Developer Credits */}
+        <div className="mt-14 pt-8 border-t border-slate-800 text-xs flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 font-medium text-center md:text-left">
+          <div className="space-y-1">
+            <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
+            <p className="text-slate-400 text-[11px] sm:text-xs">
+              Designed &amp; Developed by{" "}
+              <a
+                href="https://devlikhith.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-teal hover:text-teal-light font-bold hover:underline transition-colors inline-flex items-center gap-0.5"
+                title="Likhith's Portfolio"
+              >
+                <span>Likhith</span>
+                <span className="text-[10px]">↗</span>
+              </a>
+              <span className="mx-1.5 text-slate-600">•</span>
+              <a
+                href="mailto:kamilikhith@gmail.com"
+                className="text-slate-400 hover:text-teal transition-colors"
+                title="Email Likhith"
+              >
+                kamilikhith@gmail.com
+              </a>
+            </p>
+          </div>
+
+          <p className="flex items-center gap-2 shrink-0">
             <span className="w-1.5 h-1.5 rounded-full bg-teal" />
             <span>ISO 9001:2015 Certified Diagnostic Lab • Reg: EU/QMS/01326</span>
           </p>
